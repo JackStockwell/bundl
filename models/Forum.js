@@ -15,6 +15,11 @@ Forum.init(
 			type: DataTypes.STRING,
 			allowNull: false,
 			unique: true,
+			validate: {
+				isNull: {
+					msg: "Cannot be empty!"
+				},
+			}
 		},
 		description: {
 			type: DataTypes.STRING,
