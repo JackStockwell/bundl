@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS bundles_db;
+CREATE DATABASE bundles_db;
