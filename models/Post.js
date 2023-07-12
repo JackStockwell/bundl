@@ -11,8 +11,12 @@ Post.init(
             primaryKey: true,
             autoIncrement: true,
         },
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         content: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
         },
         date_created: {

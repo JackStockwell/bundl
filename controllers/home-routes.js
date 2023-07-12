@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
 
     if (!postData) {
       return res.status(404).json({
-        message: "User not found",
+        message: "Post not found",
       })
     }
     
@@ -19,3 +19,5 @@ router.get('/', async (req, res) => {
     return res.status(500).json(err)
   }
 });
+
+module.exports = router;
