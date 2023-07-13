@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post, Forum } = require('../../models');
+const { User, Post, Forum, UserForum } = require('../../models');
 
 router.get('/', async (req, res) => {
     try {
@@ -17,6 +17,5 @@ router.get('/', async (req, res) => {
       return res.status(500).json(err)
     }
 });
-
 
 module.exports = router;
