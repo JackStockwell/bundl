@@ -12,8 +12,10 @@ router.get('/', async (req, res) => {
       })
     }
     
-    res.status(200).json(postData)
-      
+    res.render('home')
+    
+    console.log(req.session)
+
   } catch (err) {
     return res.status(500).json(err)
   }
@@ -65,8 +67,15 @@ router.get('/s/:name/:post', async (req, res) => {
       message: "Whoops! Something went wrong..."
     })
   }
+});
 
+router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
 
-})
+  res.render('login');
+});
 
 module.exports = router;

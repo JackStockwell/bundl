@@ -25,6 +25,7 @@ router.get('/', async (req, res) => {
 router.post('/:name/follow/', async (req, res) => {
 
   console.log(req.params)
+  console.log(req.session)
 
     try {
       const forumData = await Forum.findOne({
