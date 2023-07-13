@@ -8,8 +8,8 @@ Forum.init(
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            primaryKey: true,
             autoIncrement: true,
+			primaryKey: true,
         },
 		name: {
 			type: DataTypes.STRING,
@@ -24,7 +24,6 @@ Forum.init(
 		description: {
 			type: DataTypes.STRING,
 			allowNull: false,
-			unique: true,
 		}
 	},
 	{
