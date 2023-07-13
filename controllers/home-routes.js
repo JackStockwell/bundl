@@ -2,7 +2,6 @@ const router = require('express').Router();
 const { User, Post, Forum } = require('../models');
 
 
-
 router.get('/', async (req, res) => {
   try {
     const postData = await Post.findAll();
@@ -20,12 +19,13 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/b/:name', async (req, res) => {
+router.get('/s/:name', async (req, res) => {
 
-  console.log(req.params)
   try {
     const namedForum = await Forum.findOne({
-      where: { name: req.params.name },
+      where: { 
+        name: req.params.name 
+      },
       include: [
         { model: Post }
       ]
@@ -44,6 +44,29 @@ router.get('/b/:name', async (req, res) => {
       error: (err)
     })
   }
+});
+
+router.get('/s/:name/:post', async (req, res) => {
+  const params = {
+    name: req.params.name,
+    id: req.params.post
+  }
+  console.log(params)
+  try {
+    const activePost = await Post.findOne({
+      where: {
+        id: params.id
+      }
+    })
+  
+    res.status(200).json(activePost)
+  } catch (err) {
+    res.status(500).json({
+      message: "Whoops! Something went wrong..."
+    })
+  }
+
+
 })
 
 module.exports = router;

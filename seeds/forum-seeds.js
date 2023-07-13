@@ -2,11 +2,11 @@ const { Forum } = require('../models')
 
 const forumData = [
     {
-        "name": "Thecoolkids",
+        "name": "thecoolkids",
         "description": "Cool kids only, go away"
     },
     {
-        "name": "Deepthoughts",
+        "name": "deepthoughts",
         "description": "Thoughts so deep, you'll need submersible"
     },
 ]
