@@ -69,13 +69,13 @@ router.get('/s/:name/:post', async (req, res) => {
   }
 });
 
-router.get('/login', (req, res) => {
+router.get('/welcome', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/');
     return;
   }
 
-  res.render('login');
+  res.render('welcome');
 });
 
 module.exports = router;
