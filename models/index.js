@@ -23,7 +23,7 @@ Post.belongsTo(User, {
 
 User.belongsToMany(Forum, {
     through: UserForum,
-    foreignKey: 'user_id'
+    foreignKey: 'user_id',
 });
 
 Forum.belongsToMany(User, {

@@ -1,6 +1,7 @@
 const seedUsers = require('./user-seeds');
 const seedForums = require('./forum-seeds');
 const seedPosts = require('./post-seeds');
+const seedUserForum = require('./user-forum-seeds');
 
 const sequelize = require('../config/connection');
 
@@ -15,6 +16,9 @@ const seedAll = async () => {
   
     await seedPosts();
     console.log('\n----- POSTS SEEDED -----\n');
+
+    await seedUserForum();
+    console.log('\n----- USER FORUM FOLLOW SEEDED -----\n');
     
     process.exit(0);
 };

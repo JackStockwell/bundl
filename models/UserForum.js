@@ -16,7 +16,7 @@ UserForum.init(
       }
     },
     forum_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       reference: {
         model: 'forum',
         key: 'id'

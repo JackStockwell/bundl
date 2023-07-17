@@ -1,20 +1,66 @@
 const router = require('express').Router();
-const { User, Post, Forum } = require('../models');
+const { User, Post, Forum, UserForum } = require('../models');
 
 
 router.get('/', async (req, res) => {
   try {
-    const postData = await Post.findAll();
+    const userData = await User.findOne({
+      where: {
+        username: "doouser"
+      },
+      include: Forum
+    });
+
+    const postData = await Post.findAll({
+      include: [
+        {model: Forum},
+        {model: User}
+      ],
+      where: {
+        forum_id: userData.forums.map((forum) => forum.id),
+      }
+    });
+
+    const posts = postData.map((post) => post.toJSON());
+
+    console.log(posts)
+
+    res.render(
+      'forum',
+      {posts}
+      )
+
+  } catch (err) {
+    return res.status(500).json(err)
+  }
+});
+
+router.get('/profile/:name', async (req, res) => {
+
+  try {
+    const userData = await User.findAll({
+      where: {username: req.params.name},
+      include: {
+        model: Forum
+      }
+    });
+
+    const postData = await Post.findAll({
+      include: {model: Forum},
+      where: {
+        forum_id: userData.forums.map((forum) => forum.id),
+      }
+    });
+
 
     if (!postData) {
       return res.status(404).json({
-        message: "Post not found",
+        message: "No profile found",
       })
     }
     
-    res.render('home')
+    res.status(200).json(postData)
     
-    console.log(req.session)
 
   } catch (err) {
     return res.status(500).json(err)
