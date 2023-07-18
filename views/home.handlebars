@@ -1,3 +1,10 @@
-<div class="profile-login">
-    <p>Hello world!</p>
-</div>
+<section>
+    <h2>{{user.username}}</h2>
+
+    <section class="post-container">    
+        {{#each posts as |post|}}
+        {{> post-timeline}}
+        {{/each}}
+    </section>
+</section>
+<script src=""></script>

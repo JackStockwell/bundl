@@ -1,27 +1,81 @@
 const router = require('express').Router();
-const { User, Post, Forum } = require('../models');
+const withAuth = require('../utils/auth')
+const { User, Post, Forum, UserForum } = require('../models');
 
 
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
+
+  console.log(req.session)
+
   try {
-    const postData = await Post.findAll();
+    const userData = await User.findOne({
+      where: {
+        username: "doouser"
+      },
+      include: Forum
+    });
 
-    if (!postData) {
-      return res.status(404).json({
-        message: "Post not found",
-      })
-    }
-    
-    res.render('home')
-    
-    console.log(req.session)
+    const user = userData.toJSON();
+    const postData = await Post.findAll({
+      include: [
+        {model: Forum},
+        {model: User}
+      ],
+      where: {
+        forum_id: user.forums.map((forum) => forum.id),
+      }
+
+    });
+
+    const posts = postData.map((post) => post.toJSON());
+
+    console.log(user)
+
+    res.render(
+      'home',
+      {user, posts}
+      )
+
+    // res.status(200).json(posts)
 
   } catch (err) {
     return res.status(500).json(err)
   }
 });
 
-router.get('/s/:name', async (req, res) => {
+router.get('/profile/:name', async (req, res) => {
+
+  try {
+    const userData = await User.findAll({ 
+      where: {username: req.params.name},
+      include: {
+        model: Forum
+      }
+    });
+
+    const postData = await Post.findAll({
+      include: {model: Forum},
+      where: {
+        forum_id: userData.forums.map((forum) => forum.id),
+      }
+    });
+
+
+    if (!postData) {
+      return res.status(404).json({
+        message: "No profile found",
+      })
+    }
+    
+    res.status(200).json(postData)
+    
+
+  } catch (err) {
+    return res.status(500).json(err)
+  }
+});
+
+router.get('/b/:name', async (req, res) => {
 
   try {
     const namedForum = await Forum.findOne({
@@ -31,7 +85,7 @@ router.get('/s/:name', async (req, res) => {
       include: [
         { model: Post }
       ]
-    })
+    });
 
     if (!namedForum) {
       return res.status(404).json({

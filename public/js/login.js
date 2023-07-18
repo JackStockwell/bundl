@@ -1,31 +1,53 @@
-// Query Selectors
+// Function to handle login form submission
+const handleLogin = async (event) => {
+  event.preventDefault();
+  // Retrieve input values
+  const email = document.querySelector('#email-login').value.trim();
+  const password = document.querySelector('#password-login').value.trim();
 
-const username = document.querySelector('#username-login').value.trim();
-const email = document.querySelector('#email-login').value.trim();
-const password = document.querySelector('#password-login').value.trim();
 
-
-const loginFormHandler = async (event) => {
-    // Stop the browser from submitting the form so we can do so with JavaScript
-    event.preventDefault();
-  
-    if (username && email && password) {
-      // Send the username, e-mail and password to the server
-      const response = await fetch('/api/users/login', {
+  if (email && password) {
+    const response = await fetch('/api/users/login', {
         method: 'POST',
-        body: JSON.stringify({ username , email, password }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-  
-      if (response.ok) {
-        document.location.replace('/');
-      } else {
-        alert('Failed to log in');
-      }
+        body: JSON.stringify({email, password}),
+        headers: {'Content-Type': 'application/json'},
+    });
+
+    console.log(response)
+
+    if (response.ok) {
+        document.location.replace('/')
+    } else {
+        alert("Incorrect Email or Password!")
+        console.log(response)
     }
-  };
+  } 
+  console.log("Login Submitted")
+}
+
+// Function to handle sign-up form submission
+const handleSignup = async (event) => {
+  event.preventDefault();
+  // Retrieve input values
+  const username = document.querySelector('#username-signup').value.trim();
+  const email = document.querySelector('#email-signup').value.trim();
+  const password = document.querySelector('#password-signup').value.trim();
+  const passwordConfirm = document.querySelector('#confirm-signup').value.trim();
   
-  document
-    .querySelector('.login-form')
-    .addEventListener('submit', loginFormHandler);
-  
+  if (username && email && password === passwordConfirm) {
+    const response = await fetch('/api/users/create', {
+      method: 'POST',
+      body: JSON.stringify({ username, email, password }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+    
+    console.log(response)
+    if (response.ok) {
+      document.location.replace('/');
+    } else {
+      alert(response.statusText);
+    }
+  }
+  console.log('Login form submitted');
+}
+

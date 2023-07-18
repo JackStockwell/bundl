@@ -1,19 +1,13 @@
 <section>
-    <h1>Welcome to bundl</h1>
-
+    <h1>Bundl</h1>
     {{!-- BRIEF DESC --}}
-
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi sequi maiores perspiciatis quod sunt dolor accusamus officia odio! Praesentium, laudantium!</p>
+    <p>Introducing the ultimate online hub for connecting people through shared interests and stimulating discussions. Are you seeking a platform that truly values community engagement? Look no further. Bundl is here to revolutionise the way you connect, share, and explore topics that matter to you. Try Bundl today</p>
 </section>
 
 <div class="wrapper">
     <div class="profile-login">
         <h2 class="sign-in">Sign In to Your Profile</h2>
-        <form class="login-form">
-            <div class="info-format">
-                <label for="username">Username:</label>
-                <input class="form-input" type="text" id="username-login">
-            </div>
+        <form class="login-form" onsubmit="handleLogin(event)">
             <div class="info-format">
                 <label for="email">Email:</label>
                 <input class="form-input" type="text" id="email-login">
@@ -23,7 +17,7 @@
                 <input class="form-input" type="text" id="password-login">
             </div>
             <div class="info-format">
-                <button type="submit">Login</button>
+                <button onclick="handleLogin(event)">Login</button>
             </div>
         </form>
     </div>
@@ -31,26 +25,29 @@
 
     <div class="profile-signup">
         <h2 class="sign-up">Sign Up For a Profile Today!</h2>
-        <form class="signup-form">
+        <form class="signup-form" onsubmit="handleSignup(event)">
             <div class="info-format">
                 <label for="username">Username:</label>
-                <input class="form-input" type="text" id="username-signup">
+                <input class="form-input" type="text" id="username-signup" placeholder="Username">
             </div>
             <div class="info-format">
                 <label for="email">Email:</label>
-                <input class="form-input" type="text" id="email-signup">
+                <input class="form-input" type="text" id="email-signup" placeholder="Email">
             </div>
             <div class="info-format">
                 <label for="password">Password:</label>
-                <input class="form-input" type="text" id="password-signup">
+                <input class="form-input" type="text" id="password-signup" placeholder="Password">
             </div>
             <div class="info-format">
-                <button type="submit">Sign-Up</button>
+                <label for="password">Confirm Password:</label>
+                <input class="form-input" type="text" id="confirm-signup" placeholder="Confirm password">
+            </div>
+            <div class="info-format">
+                <button onsubmit="handleSignup(event)">Sign-Up</button>
             </div>
         </form>
     </div>
 </div>
 <script src="./js/login.js">
       
-
 

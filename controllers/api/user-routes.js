@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User, Post, Forum, UserForum } = require('../../models');
 
-router.post('/', async (req, res) => {
+router.post('/create', async (req, res) => {
 
   console.log(req.session)
   
@@ -11,8 +11,8 @@ router.post('/', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_id = true;
-
-      res.status(200).json(userData);
+      
+      res.status(200).json(userData)
     });
 
     if (!userData) {
@@ -29,11 +29,13 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
+  console.log(req.body)
   try {
     const dbData = await User.findOne({
       where: {
         email: req.body.email,
       },
+      plain: true,
     });
 
     if (!dbData) {
@@ -52,15 +54,19 @@ router.post('/login', async (req, res) => {
       return;
     }
 
+    console.log(validPassword)
+
     req.session.save(() => {
-      req.session.loggedIn = true;
-      req.session.user_id = dbData.id
+      req.session.logged_in = true;
+      req.session.user_id = dbData.id;
+
+      console.log(req.session)
 
       res.status(200).json({
-          user: dbData, message: 'You are now logged in!'
+        user: dbData, message: 'You are now logged in!'
       });
-
     });
+    
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

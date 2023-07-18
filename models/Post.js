@@ -26,8 +26,8 @@ Post.init(
         },
         points: {
             type: DataTypes.INTEGER,
-            allowNull: false,
             defaultValue: 1,
+            allowNull: false,
         },
         forum_id: {
             type: DataTypes.INTEGER,
