@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const withAuth = require('../utils/auth')
 const { User, Post, Forum, UserForum } = require('../models');
+const { findOne } = require('../models/User');
 
 
 router.get('/', withAuth, async (req, res) => {
@@ -16,6 +17,7 @@ router.get('/', withAuth, async (req, res) => {
     });
 
     const user = userData.toJSON();
+
     const postData = await Post.findAll({
       include: [
         {model: Forum},
@@ -24,7 +26,6 @@ router.get('/', withAuth, async (req, res) => {
       where: {
         forum_id: user.forums.map((forum) => forum.id),
       }
-
     });
 
     const posts = postData.map((post) => post.toJSON());
@@ -33,7 +34,7 @@ router.get('/', withAuth, async (req, res) => {
 
     res.render(
       'home',
-      {user, posts}
+      {user, posts, logged_in: req.session.logged_in}
       )
 
     // res.status(200).json(posts)
@@ -46,28 +47,20 @@ router.get('/', withAuth, async (req, res) => {
 router.get('/profile/:name', async (req, res) => {
 
   try {
-    const userData = await User.findAll({ 
+    const userData = await User.findOne({
       where: {username: req.params.name},
-      include: {
-        model: Forum
-      }
-    });
-
-    const postData = await Post.findAll({
-      include: {model: Forum},
-      where: {
-        forum_id: userData.forums.map((forum) => forum.id),
-      }
-    });
-
+      include: [
+        {model: Post}
+      ]
+    })
 
     if (!postData) {
       return res.status(404).json({
         message: "No profile found",
       })
     }
-    
-    res.status(200).json(postData)
+
+    res.status(200).json(userData)
     
 
   } catch (err) {
