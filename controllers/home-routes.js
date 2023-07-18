@@ -1,8 +1,12 @@
 const router = require('express').Router();
+const withAuth = require('../utils/auth')
 const { User, Post, Forum, UserForum } = require('../models');
 
 
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
+
+  console.log(req.session)
+
   try {
     const userData = await User.findOne({
       where: {
@@ -11,24 +15,28 @@ router.get('/', async (req, res) => {
       include: Forum
     });
 
+    const user = userData.toJSON();
     const postData = await Post.findAll({
       include: [
         {model: Forum},
         {model: User}
       ],
       where: {
-        forum_id: userData.forums.map((forum) => forum.id),
+        forum_id: user.forums.map((forum) => forum.id),
       }
+
     });
 
     const posts = postData.map((post) => post.toJSON());
 
-    console.log(posts)
+    console.log(user)
 
     res.render(
-      'forum',
-      {posts}
+      'home',
+      {user, posts}
       )
+
+    // res.status(200).json(posts)
 
   } catch (err) {
     return res.status(500).json(err)
@@ -38,7 +46,7 @@ router.get('/', async (req, res) => {
 router.get('/profile/:name', async (req, res) => {
 
   try {
-    const userData = await User.findAll({
+    const userData = await User.findAll({ 
       where: {username: req.params.name},
       include: {
         model: Forum
@@ -67,7 +75,7 @@ router.get('/profile/:name', async (req, res) => {
   }
 });
 
-router.get('/s/:name', async (req, res) => {
+router.get('/b/:name', async (req, res) => {
 
   try {
     const namedForum = await Forum.findOne({
@@ -77,7 +85,7 @@ router.get('/s/:name', async (req, res) => {
       include: [
         { model: Post }
       ]
-    })
+    });
 
     if (!namedForum) {
       return res.status(404).json({

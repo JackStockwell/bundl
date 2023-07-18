@@ -9,7 +9,8 @@ router.post('/', async (req, res) => {
             content: req.body.content,
         }
 
-        const postData = await Post.create();
+        const postData = await Post.create(newPost);
+        
     } catch (error) {
         res.status(500).json(error)
     }

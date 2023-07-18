@@ -1,6 +1,6 @@
 <section>
     <p id="username-handle" data-username="{{user.id}}">{{user.username}}</p>
-    <button type="button" onclick="followUser(event)" id="follow-user" class="follow-btn">Follow</button>
+    <button type="button" id="follow-user" class="follow-btn">Follow</button>
 
     {{#each posts as |post|}}
     {{> post-timeline}}

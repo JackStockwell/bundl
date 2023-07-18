@@ -1,9 +1,10 @@
 <section>
-    <p id="username-handle" data-username="{{profile.username}}">{{username}}</p>
-</section>
-<section>
-    {{#each posts as |post|}}
-    {{> post-timeline}}
-    {{/each}}
+    <h2>{{user.username}}</h2>
+
+    <section class="post-container">    
+        {{#each posts as |post|}}
+        {{> post-timeline}}
+        {{/each}}
+    </section>
 </section>
 <script src=""></script>

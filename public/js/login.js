@@ -1,57 +1,51 @@
-// Get references to the login and signup forms
-const loginForm = document.querySelector('.login-form');
-const signupForm = document.querySelector('.signup-form');
-const loginButton = document.querySelector('#login-button');
-const signupButton = document.querySelector('#signup-button');
-
-const usernameLoginInput = document.querySelector('#username-login');
-const emailLoginInput = document.querySelector('#email-login');
-const passwordLoginInput = document.querySelector('#password-login');
-
-const usernameSignupInput = document.querySelector('#username-signup');
-const emailSignupInput = document.querySelector('#email-signup');
-const passwordSignupInput = document.querySelector('#password-signup');
-
-// Add event listeners for form submissions
-loginForm.addEventListener('submit', handleLogin);
-signupForm.addEventListener('submit', handleSignup);
-
-// Add event listeners for button clicks
-loginButton.addEventListener('click', showLoginForm);
-signupButton.addEventListener('click', showSignupForm);
-
 // Function to handle login form submission
-function handleLogin(event) {
+const handleLogin = async (event) => {
   event.preventDefault();
   // Retrieve input values
-  const username = usernameLoginInput.value;
-  const email = emailLoginInput.value;
-  const password = passwordLoginInput.value;
+  const email = document.querySelector('#email-login').value.trim();
+  const password = document.querySelector('#password-login').value.trim();
 
+  if (email && password) {
+    const response = await fetch('/api/users/login', {
+        method: 'POST',
+        body: JSON.stringify({email, password}),
+        headers: {'Content-Type': 'application/json'},
+    });
+
+    console.log(response)
+
+    if (response.ok) {
+        document.location.replace('/')
+    } else {
+        alert("Incorrect Email or Password!")
+        console.log(response)
+    }
+  } 
+  console.log("Login Submitted")
+}
+
+// Function to handle sign-up form submission
+const handleSignup = async (event) => {
+  event.preventDefault();
+  // Retrieve input values
+  const username = document.querySelector('#username-signup').value.trim();
+  const email = document.querySelector('#email-signup').value.trim();
+  const password = document.querySelector('#password-signup').value.trim();
+  const passwordConfirm = document.querySelector('#confirm-signup').value.trim();
+  
+  if (username && email && password === passwordConfirm) {
+    const response = await fetch('/api/users/create', {
+      method: 'POST',
+      body: JSON.stringify({ username, email, password }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+    
+    console.log(response)
+    if (response.ok) {
+      document.location.replace('/');
+    } else {
+      alert(response.statusText);
+    }
+  }
   console.log('Login form submitted');
-}
-
-// Function to handle signup form submission
-function handleSignup(event) {
-  event.preventDefault();
-  // Retrieve input values
-  const username = usernameSignupInput.value;
-  const email = emailSignupInput.value;
-  const password = passwordSignupInput.value;
-
-  console.log('Signup form submitted');
-}
-
-// Function to show the login form
-function showLoginForm(event) {
-  event.preventDefault();
-  loginForm.style.display = 'block';
-  signupForm.style.display = 'none';
-}
-
-// Function to show the signup form
-function showSignupForm(event) {
-  event.preventDefault();
-  signupForm.style.display = 'block';
-  loginForm.style.display = 'none';
 }
