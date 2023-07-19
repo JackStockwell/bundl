@@ -21,7 +21,7 @@ router.post('/create', async (req, res) => {
       req.session.logged_id = true;
 
       res.status(200).json({
-        user: userData, message: 'You are now logged in!'
+        user: userData, message: 'Account successfully created!'
       });
     });
 
