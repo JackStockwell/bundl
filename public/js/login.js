@@ -33,8 +33,14 @@ const handleSignup = async (event) => {
   const email = document.querySelector('#email-signup').value.trim();
   const password = document.querySelector('#password-signup').value.trim();
   const passwordConfirm = document.querySelector('#confirm-signup').value.trim();
+
+ 
+ 
   
   if (username && email && password === passwordConfirm) {
+  
+    
+
     const response = await fetch('/api/users/create', {
       method: 'POST',
       body: JSON.stringify({ username, email, password }),
@@ -46,7 +52,8 @@ const handleSignup = async (event) => {
       console.log(response)
       document.location.replace('/');
     } else {
-      alert(response.statusText);
+      const PWerror= document.getElementById("error-span")
+       PWerror.innerHTML='Password CANNOT be less than 8 or bigger than 32!'
     }
   }
   console.log('Login form submitted');

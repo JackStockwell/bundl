@@ -22,7 +22,7 @@ router.post('/create', async (req, res) => {
     });
 
   } catch (err) {
-    return res.status(500).json(err)
+    return console.log(res.status(500).json(err))
   }
 });
 
