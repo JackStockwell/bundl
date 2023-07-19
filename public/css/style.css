@@ -17,7 +17,6 @@ body {
   --dark-bg: #5782C9;
   --dark-text: #456177;
   --light-text: #CEDDEF;
-
   --darkbg-2: #324757;
   --darkbg: #3A68B3;
   --lightbg: #5782C9;
@@ -87,15 +86,21 @@ a:any-link {
   padding: 2em;
 }
 
+.title {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.title img {
+  display: none;
+  max-height: 150px;
+}
+
 .title h1 {
   font-family: 'Comfortaa', 'sans-serif';
   font-size: 5em;
   font-weight: 400;
   color: var(--light-text);
-}
-
-.title {
-  
 }
   
 .container {
@@ -214,10 +219,34 @@ a:any-link {
 /* MEDIA QUERIES */
 
 @media(min-width: 40em) {
-  
+  .title {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: baseline;
+  }
+
+  .title h1 {
+    font-size: 7em;
+  }
+
+  .title img {
+    display: block;
+    height: 5em;
+    margin-left: 1rem;
+  }
 }
 
 @media(min-width: 60em) {
+
+  .title h1 {
+    font-size: 10em;
+  }
+
+  .title img {
+    height: 7.5em;
+  }
 
   .testbtn:hover {
     box-shadow: inset -300px 0 0 0 var(--darkbg-2);
