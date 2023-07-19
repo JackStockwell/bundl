@@ -1,3 +1,8 @@
+/* IMPORTS */
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500&display=swap');
+
+
 body {
   display: flex;
   flex-direction: column;
@@ -8,7 +13,7 @@ body {
 }
 
 :root {
-  --light-bg: #CEDDEF;
+  --light-text: #CEDDEF;
   --dark-bg: #5782C9;
   --dark-text: #456177;
   --light-text: #CEDDEF;
@@ -38,7 +43,13 @@ a:any-link {
   text-decoration: none;
 }
 
-/* BODY WRAPPER */
+/* WELCOME PAGE */
+
+/* WRAPPER */
+
+.welcome-wrapper h2, h3 {
+  text-transform: uppercase;
+}
 
 .welcome-wrapper section:nth-child(odd) {
   background-color: var(--darkbg);
@@ -48,12 +59,23 @@ a:any-link {
   background-color: var(--lightbg);
 }
 
-.wrapper-login {
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.form-wrapper {
   display: grid;
   grid-template-columns: 1fr;
-  align-items: center;
+  align-items: start;
   justify-items: center;
-  gap: 2rem;
+}
+
+/* STANDARD WRAPPER */
+
+.main-wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
 }
 
 /* HERO */
@@ -65,8 +87,15 @@ a:any-link {
   padding: 2em;
 }
 
-.hero h1 {
-  font-size: 3em;
+.title h1 {
+  font-family: 'Comfortaa', 'sans-serif';
+  font-size: 5em;
+  font-weight: 400;
+  color: var(--light-text);
+}
+
+.title {
+  
 }
   
 .container {
@@ -93,6 +122,7 @@ a:any-link {
   flex-flow: column nowrap;
   max-width: 60vw;
   align-items: center;
+  padding: 3ch 6ch;
 }
 
 .profile-login,
@@ -153,14 +183,9 @@ a:any-link {
   padding: 1ch 3ch;
   transition: box-shadow 300ms ease;
   color: var(--dark-text);
-  background: var(--light-bg);
+  background: var(--light-text);
   box-shadow: inset 0 0 0 0 var(--darkbg-2);
   font-size: 1em;
-}
-
-.testbtn:hover {
-  box-shadow: inset -300px 0 0 0 var(--darkbg-2);
-  color: var(--light-bg);
 }
 
 /* MODAL STYLING */
@@ -188,3 +213,19 @@ a:any-link {
   
 /* MEDIA QUERIES */
 
+@media(min-width: 40em) {
+  
+}
+
+@media(min-width: 60em) {
+
+  .testbtn:hover {
+    box-shadow: inset -300px 0 0 0 var(--darkbg-2);
+    color: var(--light-text);
+  }
+
+  .form-wrapper {
+    grid-template-columns: 1fr 1fr;
+    max-width: 60em;
+  }
+}
