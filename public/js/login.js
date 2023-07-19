@@ -34,13 +34,9 @@ const handleSignup = async (event) => {
   const password = document.querySelector('#password-signup').value.trim();
   const passwordConfirm = document.querySelector('#confirm-signup').value.trim();
 
- 
- 
-  
+  // Ensures all fields are inserted and password confirmation matches.
   if (username && email && password === passwordConfirm) {
   
-    
-
     const response = await fetch('/api/users/create', {
       method: 'POST',
       body: JSON.stringify({ username, email, password }),
@@ -56,6 +52,6 @@ const handleSignup = async (event) => {
        PWerror.innerHTML='Password CANNOT be less than 8 or bigger than 32!'
     }
   }
-  console.log('Login form submitted');
+
 }
 
