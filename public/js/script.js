@@ -13,15 +13,17 @@ const handleLogout = async () => {
     }
 };
 
-  
+// Modal selectors
 const openModal = document.querySelector('[data-open-modal]')
 const closeModal = document.querySelector('[data-close-modal]')
 const modal = document.querySelector('[data-modal]')
 
+// Opens the modal
 openModal.addEventListener('click', () => {
     modal.showModal()
 })
 
+// Close the modal
 closeModal.addEventListener('click', () => {
     modal.close()
 })

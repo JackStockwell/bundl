@@ -4,24 +4,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bundles</title>
+  <title>Bundl</title>
   <link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 
 <body>
+  {{#if logged_in}}
   <nav>
-    {{#if logged_in}}
+    <button class="btn"><a href="/profile/{{user.username}}">Profile</a></button>
     <button data-open-modal class="btn">Logout</button>
-    <dialog data-modal id="logout-modal">
-      <h2>Are you sure you want to logout?</h2>
-      <button class="btn" onclick="handleLogout(event)">Yes</button>
-      <button data-close-modal>No</button>
+    <dialog data-modal class="modal">
+      <h2>Logout?</h2>
+      <div class="modal-wrapper"> 
+        <button class="btn" onclick="handleLogout(event)">Yes</button>
+        <button class="btn" data-close-modal>No</button>
+      </div>
     </dialog>
-    {{else}}
-    <button id="logout" class="btn">Login</button>
-    {{/if}}
-    <a href="/profile/{{user.username}}">Profile</a>
   </nav>
+  {{/if}}
 
 {{{body}}}
 
