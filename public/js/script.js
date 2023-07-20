@@ -22,8 +22,6 @@ const newPost = async (event) => {
     const forum_id = document.querySelector('[data-forum_id]').getAttribute('data-forum_id');
     const user_id = document.querySelector('[data-user_id]').getAttribute('data-user_id');
 
-    console.log(newPost)
-
     const response = await fetch('/api/post/', {
         method: 'POST',
         body: JSON.stringify({title, content, forum_id, user_id}),
@@ -36,6 +34,22 @@ const newPost = async (event) => {
         alert(response.statusText)
     }
 
+}
+
+const followBundl = async (event) => {
+    event.preventDefault();
+
+    const response = await fetch('/api/users/logout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+    
+      if (response.ok) {
+        // If successfully logged out, redirect to the login page
+        document.location.replace('/welcome');
+      } else {
+        alert(response.statusText);
+      }
 }
 
 // Logout modal

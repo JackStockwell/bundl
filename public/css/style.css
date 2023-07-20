@@ -25,10 +25,16 @@ body {
 /* NAVIGATION */
 
 nav {
-  top: 0;
+  position: sticky;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 1fr;
   width: 100%;
-  height: 7ch;
-  background-color: var(--blue-bg);
+  height: fit-content;
+  padding: 0.5rem;
+  background: var(--dark-bg);
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.389);
+  justify-items: center;
 }
 
 /* LINKS */
@@ -107,10 +113,16 @@ a:any-link {
 }
 
 .title h1 {
-  font-family: 'Comfortaa', 'sans-serif';
   font-size: 5em;
   font-weight: 400;
+}
+
+h1 {
+  font-family: 'Comfortaa', 'sans-serif';
   color: var(--light-text);
+  font-weight: 400;
+  font-size: 3em;
+  margin: 10px;
 }
   
 .container {
@@ -177,21 +189,8 @@ a:any-link {
 
 /* BUTTON */
 
-.btn {
-  cursor: pointer;
-  height: 5ch;
-  width: 15ch;
-  margin: 1em;
-  padding: 1ch;
-  border: 2px solid transparent;
-  background: var(--light-text);
-  color: var(--light-blue-bg);
-  font-size: 0.8em;
-  text-transform: uppercase;
-  border-radius: 0.5rem;
-}
-
-.testbtn {
+.btn,
+.largebtn {
   cursor: pointer;
   border: 3px solid transparent;
   border-radius: 0.5rem;
@@ -201,6 +200,12 @@ a:any-link {
   background: var(--light-text);
   box-shadow: inset 0 0 0 0 var(--darkbg-2);
   font-size: 1em;
+}
+
+.btn {
+  border-radius: 0;
+  background: transparent;
+  color: var(--light-text)
 }
 
 /* MODAL STYLING */
@@ -261,6 +266,12 @@ a:any-link {
 
 @media(min-width: 60em) {
 
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
   .title h1 {
     font-size: 10em;
   }
@@ -269,8 +280,13 @@ a:any-link {
     height: 7.5em;
   }
 
-  .testbtn:hover {
+  .largebtn:hover {
     box-shadow: inset -300px 0 0 0 var(--darkbg-2);
+    color: var(--light-text);
+  }
+
+  .btn:hover {
+    box-shadow: inset 0 -50px 0 0 var(--darkbg-2);
     color: var(--light-text);
   }
 

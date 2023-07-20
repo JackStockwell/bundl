@@ -59,8 +59,6 @@ router.get('/profile/:name', withAuth, async (req, res) => {
       })
     }
 
-    // res.json(posts)
-
     res.render(
       'profile',
       {user, posts, logged_in: req.session.logged_in}
@@ -80,24 +78,26 @@ router.get('/b/:name', withAuth, async (req, res) => {
         name: req.params.name 
       },
       include: [
-        { model: Post },
+        {model: Post}
       ]
     });
-
-    const forum_id = namedForum.id
 
     if (!namedForum) {
       return res.status(404).json({
         message: "Error 404"
       })
     }
+    
+    const forum = namedForum.toJSON();
+    const posts = namedForum.posts.map((post) => post.toJSON())
 
-    console.log(namedForum)
+    console.log(forum)
+    console.log(posts)
 
     res.render('forum', {
-      namedForum,
+      forum,
       user_id: req.session.user_id,
-      forum_id: forum_id,
+      forum_id: namedForum.id,
       logged_in: req.session.logged_in
     })
     
