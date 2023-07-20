@@ -4,7 +4,12 @@ const { findAll } = require('../../models/User');
 
 router.get('/user', async (req, res) => {
     try {
-        const userData = await User.findAll();
+        const userData = await User.findAll({
+            include: [
+                {model: Post},
+                {model: Forum}
+            ]
+        });
 
         res.status(200).json(userData)
     } catch (err) {

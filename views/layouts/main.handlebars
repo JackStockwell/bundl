@@ -11,6 +11,7 @@
 <body>
   {{#if logged_in}}
   <nav>
+    <button class="btn"><a href="/">Home</a></button>
     <button class="btn"><a href="/profile/{{user.username}}">Profile</a></button>
     {{!-- LOGOUT MODAL --}}
     <button data-open-modal-logout class="btn">Logout</button>

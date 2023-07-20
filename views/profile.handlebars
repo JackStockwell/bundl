@@ -1,0 +1,14 @@
+<header>
+    <section>
+        <h2 data-user_id="{{user.user_id}}">{{user.username}}</h2>
+
+    </section>
+</header>
+
+<main>
+    <section class="post-container">
+        {{#each posts as |post|}}
+        {{> post-timeline}}
+        {{/each}}
+    </section>
+</main>
