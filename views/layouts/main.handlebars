@@ -11,7 +11,8 @@
 <body>
   {{#if logged_in}}
   <nav>
-    <button class="btn"><a href="/">Home</a></button>
+    <a href="/"><h1>bundl</h1></a>
+    <div>
     <button class="btn"><a href="/profile/{{user.username}}">Profile</a></button>
     {{!-- LOGOUT MODAL --}}
     <button data-open-modal-logout class="btn">Logout</button>
@@ -32,6 +33,7 @@
           <button class="btn" data-close-modal-forum>Cancel</button>
         </div>
       </dialog>
+    </div>
   </nav>
 
     {{{body}}}

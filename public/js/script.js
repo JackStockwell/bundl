@@ -36,6 +36,22 @@ const newPost = async (event) => {
 
 }
 
+const followBundl = async (event) => {
+    event.preventDefault();
+
+    const response = await fetch('/api/users/logout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+    
+      if (response.ok) {
+        // If successfully logged out, redirect to the login page
+        document.location.replace('/welcome');
+      } else {
+        alert(response.statusText);
+      }
+}
+
 // Logout modal
 
 // Modal selectors
