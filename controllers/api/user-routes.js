@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { User, Post, Forum, UserForum } = require('../../models');
-const uploadAvatar = require('../../middleware')
+const { uploadAvatar, s3 } = require('../../middleware/awsconnect.js')
 
 router.post('/create', async (req, res) => {
   

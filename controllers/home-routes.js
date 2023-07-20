@@ -57,18 +57,18 @@ router.get('/profile/:name', withAuth, async (req, res) => {
       ]
     })
 
-    const user = userData.toJSON()
-    const posts = userData.posts.map((post) => post.toJSON())
-
     if (!userData) {
       return res.status(404).json({
         message: "No profile found",
       })
     }
 
+    const user = userData.toJSON()
+    const posts = userData.posts.map((post) => post.toJSON())
+
     res.render(
       'profile',
-      {user, posts, logged_in: req.session.logged_in}
+      {user, posts, logged_in: req.session.logged_in, user_id: req.session.user_id}
       )
     
 

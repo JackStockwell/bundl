@@ -1,12 +1,12 @@
 <header>
     <section>
-        <h2 data-user_id="{{user.user_id}}">{{user.username}}</h2>
+        <h2 data-user_id="{{user.id}}">{{user.username}}</h2>
 
-        {{#if logged_in}}
+        {{#isEqual user_id user.id}}
         <form action="/api/users/avatar" method="post" enctype="multipart/form-data">
             <input type="file" name="avatar" id="avatar">
         </form>
-        {{/if}}
+        {{/isEqual}}
 
     </section>
 </header>

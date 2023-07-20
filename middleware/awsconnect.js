@@ -11,7 +11,6 @@ const s3 = new aws.S3({
 	region: 'eu-west-2',
 });
 
-​
 const uploadAvatar = multer({
 	storage: multerS3({
 		s3: s3,
@@ -38,6 +37,5 @@ const uploadAvatar = multer({
 	}),
 	limits: { fileSize: 40000000 }, //In bytes: Limited to 5mb
 });
-​
 
 module.exports = { uploadAvatar, s3 };
