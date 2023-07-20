@@ -13,17 +13,65 @@ const handleLogout = async () => {
     }
 };
 
+
+const newPost = async (event) => {
+    event.preventDefault();
+
+    const title = document.querySelector('#postTitle').value.trim();
+    const content = document.querySelector('#postContent').value.trim();
+    const user_id = document.querySelector('[data-user_id]').getAttribute('data-user_id');
+    const forum_id = document.querySelector('[data-forum_id]').getAttribute('data-forum_id');
+
+    const newPost = {
+        title: title,
+        content: content,
+        forum_id: forum_id,
+        user_id: user_id
+    }
+
+    const response = await fetch('/api/post/', {
+        method: 'POST',
+        body: JSON.stringify({title, content, user_id, forum_id}),
+        headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+        location.reload()
+    } else {
+        alert(response.statusText)
+    }
+
+}
+
+// Logout modal
+
 // Modal selectors
-const openModal = document.querySelector('[data-open-modal]')
-const closeModal = document.querySelector('[data-close-modal]')
-const modal = document.querySelector('[data-modal]')
+const openLogoutModal = document.querySelector('[data-open-modal-logout]')
+const closeLogoutModal = document.querySelector('[data-close-modal-logout]')
+const logoutModal = document.querySelector('[data-modal-logout]')
 
 // Opens the modal
-openModal.addEventListener('click', () => {
-    modal.showModal()
+openLogoutModal.addEventListener('click', () => {
+    logoutModal.showModal()
 })
 
 // Close the modal
-closeModal.addEventListener('click', () => {
-    modal.close()
+closeLogoutModal.addEventListener('click', () => {
+    logoutModal.close()
+})
+
+// New Forum modal
+
+const openForumModal = document.querySelector('[data-open-modal-forum]')
+const closeForumModal = document.querySelector('[data-close-modal-forum]')
+const forumModal = document.querySelector('[data-modal-newforum]')
+
+// Opens the modal
+openForumModal.addEventListener('click', () => {
+    forumModal.showModal()
+})
+
+// Close the modal
+closeForumModal.addEventListener('click', () => {
+    forumModal.close()
 })

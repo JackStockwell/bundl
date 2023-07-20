@@ -72,9 +72,12 @@ a:any-link {
 
 /* STANDARD WRAPPER */
 
-.main-wrapper {
+.forum-wrapper { 
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr;
+  max-width: 100em;
+  width: 90vw;
+  padding: 10px;
 }
 
 /* HERO */
@@ -89,6 +92,7 @@ a:any-link {
 .title {
   display: flex;
   flex-flow: column nowrap;
+  align-items: center;
 }
 
 .title img {
@@ -214,6 +218,19 @@ a:any-link {
   display: flex;
   flex-flow: column nowrap;
   gap: 1em;
+}
+
+/* POST CONTENT */
+
+.post-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.post {
+  background: var(--dark-bg);
+  padding: 1rem;
 }
   
 /* MEDIA QUERIES */

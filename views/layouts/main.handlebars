@@ -5,34 +5,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bundl</title>
-  <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 
 <body>
   {{#if logged_in}}
   <nav>
     <button class="btn"><a href="/profile/{{user.username}}">Profile</a></button>
-    <button data-open-modal class="btn">Logout</button>
-    <dialog data-modal class="modal">
-      <h2>Logout?</h2>
-      <div class="modal-wrapper"> 
-        <button class="btn" onclick="handleLogout(event)">Yes</button>
-        <button class="btn" data-close-modal>No</button>
-      </div>
-    </dialog>
+    {{!-- LOGOUT MODAL --}}
+    <button data-open-modal-logout class="btn">Logout</button>
+      <dialog data-modal-logout class="modal">
+        <h2>Logout?</h2>
+        <div class="modal-wrapper logout-modal"> 
+          <button class="btn" onclick="handleLogout(event)">Yes</button>
+          <button class="btn" data-close-modal-logout>No</button>
+        </div>
+      </dialog>
+    {{!-- NEW BUNDL MODAL --}}
+    <button data-open-modal-forum class="btn">New bundl</button>
+     <dialog data-modal-newforum class="modal">
+        <h2>New Sub-bundl</h2>
+        <p></p>
+        <div class="modal-wrapper forum-modal"> 
+          <button class="btn" onclick="handleLogout(event)">Yes</button>
+          <button class="btn" data-close-modal-forum>Cancel</button>
+        </div>
+      </dialog>
   </nav>
-  <main class="main-wrapper">
-    <aside>
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit, consequuntur harum. Dolorum earum in unde veritatis, aut enim rerum odit!</p>
-    </aside>
+
     {{{body}}}
-  </main>
+
   {{else}}
+
     {{{body}}}
+
   {{/if}}
 <footer>
 </footer>
-
+<script src="../js/script.js"></script>
 </body>
-  <script src="./js/script.js"></script>
 </html>
