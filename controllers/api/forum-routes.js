@@ -41,22 +41,19 @@ router.post('/', async (req, res) => {
 
 })
 
-router.post('/:name/follow/', async (req, res) => {
+router.post('/follow', async (req, res) => {
+
+  if (!req.body.forum_id || !req.session.user_id) {
+    return res.status(404).json({
+      message: "Forum not found",
+    })
+  }
 
   try {
-    const forumData = await Forum.findOne({
-      where: {name: req.params.name}
-    })
-
-    if (!forumData) {
-      return res.status(404).json({
-        message: "Forum not found",
-      })
-    }
 
     const newFollow = {
-      user_id: res.session.id,
-      forum_id: forumData.id,
+      user_id: req.session.user_id,
+      forum_id: req.body.forum_id,
     }
 
     console.log(newFollow)
@@ -65,7 +62,7 @@ router.post('/:name/follow/', async (req, res) => {
     
     console.log(updateForum)
     
-    res.status(200).json(forumData)
+    res.status(200).json(updateForum)
 
     } catch (err) {
       return res.status(500).json(err)

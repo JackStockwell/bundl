@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User, Post, Forum, UserForum } = require('../../models');
 
 router.post('/', async (req, res) => {
-    console.log(req.body)
+    console.log(req.body.user_id)
     try {
 
         const newPost = {

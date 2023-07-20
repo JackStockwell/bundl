@@ -34,19 +34,23 @@ const newPost = async (event) => {
         alert(response.statusText)
     }
 
-}
+}  
 
-const followBundl = async (event) => {
+const followForum = async (event) => {
     event.preventDefault();
 
-    const response = await fetch('/api/users/logout', {
+    const forum_id = document.querySelector('[data-forum_id]').getAttribute('data-forum_id');
+
+    console.log(forum_id)
+
+    const response = await fetch('/api/subs/follow/', {
         method: 'POST',
+        body: JSON.stringify({forum_id}),
         headers: { 'Content-Type': 'application/json' },
       });
     
       if (response.ok) {
-        // If successfully logged out, redirect to the login page
-        document.location.replace('/welcome');
+
       } else {
         alert(response.statusText);
       }

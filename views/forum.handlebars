@@ -1,7 +1,6 @@
 <header>
     <section>
         <h2 data-user_id="{{user_id}}" data-forum_id="{{forum_id}}">{{forum.name}}</h2>
-
     </section>
 </header>
 
@@ -17,8 +16,8 @@
 
     <section class="forum-wrapper">
         <section>
-            <p id="username-handle" data-username="{{user.id}}">{{forum.name}}</p>
-            <button class="btn" type="button" id="follow-user">Follow</button>
+            <p id="username-handle">{{forum.name}}</p>
+            <button class="btn" onclick="followForum(event)" id="follow-user">Follow</button>
         </section>
     </section>
 
