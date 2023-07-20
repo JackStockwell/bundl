@@ -7,7 +7,7 @@ router.get('/', withAuth, async (req, res) => {
   try {
     const userData = await User.findOne({
       where: {
-        username: "doouser"
+        id: req.session.user_id
       },
       include: Forum
     });
@@ -19,6 +19,7 @@ router.get('/', withAuth, async (req, res) => {
         {model: Forum},
         {model: User}
       ],
+      order: [['date_created', 'DESC']],
       where: {
         forum_id: user.forums.map((forum) => forum.id),
       }
@@ -43,18 +44,27 @@ router.get('/profile/:name', withAuth, async (req, res) => {
   try {
     const userData = await User.findOne({
       where: {username: req.params.name},
+      attributes: ['id', 'username'],
       include: [
         {model: Post}
       ]
     })
 
-    if (!postData) {
+    const user = userData.toJSON()
+    const posts = userData.posts.map((post) => post.toJSON())
+
+    if (!userData) {
       return res.status(404).json({
         message: "No profile found",
       })
     }
 
-    res.status(200).json(userData)
+    // res.json(posts)
+
+    res.render(
+      'profile',
+      {user, posts, logged_in: req.session.logged_in}
+      )
     
 
   } catch (err) {
@@ -82,12 +92,15 @@ router.get('/b/:name', withAuth, async (req, res) => {
       })
     }
 
+    console.log(namedForum)
+
     res.render('forum', {
       namedForum,
       user_id: req.session.user_id,
       forum_id: forum_id,
       logged_in: req.session.logged_in
     })
+    
 
   } catch (err) {
     res.status(500).json({
