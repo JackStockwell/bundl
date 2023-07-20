@@ -1,10 +1,25 @@
-<section>
-    <p id="username-handle" data-username="{{user.id}}">{{user.username}}</p>
-    <button type="button" id="follow-user" class="follow-btn">Follow</button>
+<header>
+    <section>
+        <h2 data-user_id="{{user_id}}" data-forum_id="{{forum_id}}">{{username}}</h2>
 
-    {{#each posts as |post|}}
-    {{> post-timeline}}
-    {{/each}}
-</section>
+    </section>
+</header>
 
-<script src="/js/script.js"></script>
+<main>
+    {{!-- POST FORM CONTAINER --}}
+    <section class="new-post">
+        <form onsubmit="newPost(event)">
+            <input type="text" name="title" id="postTitle">
+            <input type="text" name="content" id="postContent">
+            <button onclick="newPost(event)" type="button">Post</button>
+        </form>
+    </section>
+
+
+    <section class="forum-wrapper">
+        <section>
+            <p id="username-handle" data-username="{{user.id}}">{{user.username}}</p>
+            <button type="button" id="follow-user" class="follow-btn">Follow</button>
+        </section>
+    </section>
+</main>

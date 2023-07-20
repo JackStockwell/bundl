@@ -1,21 +1,115 @@
+/* IMPORTS */
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500&display=swap');
+
+
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+:root {
+  --light-text: #CEDDEF;
+  --dark-bg: #5782C9;
+  --dark-text: #456177;
+  --light-text: #CEDDEF;
+  --darkbg-2: #324757;
+  --darkbg: #3A68B3;
+  --lightbg: #5782C9;
+}
+
+/* NAVIGATION */
+
+nav {
+  top: 0;
+  width: 100%;
+  height: 7ch;
+  background-color: var(--blue-bg);
+}
+
+/* LINKS */
+
+a {
+  text-decoration: none;
+  color: var(--light-blue-bg);
+}
+
+a:any-link {
+  text-decoration: none;
+}
+
+/* WELCOME PAGE */
+
+/* WRAPPER */
+
+.welcome-wrapper h2, h3 {
+  text-transform: uppercase;
+}
+
+.welcome-wrapper section:nth-child(odd) {
+  background-color: var(--darkbg);
+}
+
+.welcome-wrapper section:nth-child(even) {
+  background-color: var(--lightbg);
+}
+
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.form-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  justify-items: center;
+}
+
+/* STANDARD WRAPPER */
+
+.forum-wrapper { 
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 100em;
+  width: 90vw;
+  padding: 10px;
+}
+
+/* HERO */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  text-align: center;
+  padding: 2em;
+}
+
+.title {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.title img {
+  display: none;
+  max-height: 150px;
+}
+
+.title h1 {
+  font-family: 'Comfortaa', 'sans-serif';
+  font-size: 5em;
+  font-weight: 400;
+  color: var(--light-text);
+}
   
 .container {
   text-align: center;
   margin-bottom: 20px;
-}
-
-h1 {
-  font-size: 36px;
-  margin-bottom: 10px;
 }
 
 .description {
@@ -29,10 +123,15 @@ h1 {
   align-items: center;
 }
 
+/* LOGIN FORM */
+
 .profile-login,
 .profile-signup {
-  width: 300px;
-  margin-bottom: 20px;
+  display: flex;
+  flex-flow: column nowrap;
+  max-width: 60vw;
+  align-items: center;
+  padding: 3ch 6ch;
 }
 
 .profile-login,
@@ -44,11 +143,14 @@ h1 {
 .profile-signup form {
   display: flex;
   flex-direction: column;
+  gap: 1em;
+  min-width: 300px;
 }
 
 .profile-login .info-format,
 .profile-signup .info-format {
   margin-bottom: 10px;
+  max-width: 30ch;
 }
 
 .profile-login label,
@@ -56,9 +158,8 @@ h1 {
   font-weight: bold;
 }
 
-.profile-login .form-input,
-.profile-signup .form-input {
-  width: 100%;
+.form-input,
+.form-input {
   padding: 10px;
   font-size: 16px;
 }
@@ -68,12 +169,109 @@ h1 {
   justify-content: space-between;
 }
 
-button[type="submit"] {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
+/* BUTTON */
+
+.btn {
   cursor: pointer;
-  font-size: 16px;
+  height: 5ch;
+  width: 15ch;
+  margin: 1em;
+  padding: 1ch;
+  border: 2px solid transparent;
+  background: var(--light-text);
+  color: var(--light-blue-bg);
+  font-size: 0.8em;
+  text-transform: uppercase;
+  border-radius: 0.5rem;
+}
+
+.testbtn {
+  cursor: pointer;
+  border: 3px solid transparent;
+  border-radius: 0.5rem;
+  padding: 1ch 3ch;
+  transition: box-shadow 300ms ease;
+  color: var(--dark-text);
+  background: var(--light-text);
+  box-shadow: inset 0 0 0 0 var(--darkbg-2);
+  font-size: 1em;
+}
+
+/* MODAL STYLING */
+
+.modal {
+  padding: 1em;
+  text-align: center;
+  max-width: 50ch;
+  min-width: 30ch;
+}
+
+.modal h2 {
+  margin: 2em;
+}
+
+.modal button {
+
+}
+
+.modal-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1em;
+}
+
+/* POST CONTENT */
+
+.post-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.post {
+  background: var(--dark-bg);
+  padding: 1rem;
 }
   
+/* MEDIA QUERIES */
+
+@media(min-width: 40em) {
+  .title {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: baseline;
+  }
+
+  .title h1 {
+    font-size: 7em;
+  }
+
+  .title img {
+    display: block;
+    height: 5em;
+    margin-left: 1rem;
+  }
+}
+
+@media(min-width: 60em) {
+
+  .title h1 {
+    font-size: 10em;
+  }
+
+  .title img {
+    height: 7.5em;
+  }
+
+  .testbtn:hover {
+    box-shadow: inset -300px 0 0 0 var(--darkbg-2);
+    color: var(--light-text);
+  }
+
+  .form-wrapper {
+    grid-template-columns: 1fr 1fr;
+    max-width: 60em;
+  }
+}

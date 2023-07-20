@@ -4,30 +4,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bundles</title>
-  <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <title>Bundl</title>
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 
 <body>
+  {{#if logged_in}}
   <nav>
-    {{#if logged_in}}
-    <button data-open-modal class="btn">Logout</button>
-    <dialog data-modal id="logout-modal">
-      <h2>Are you sure you want to logout?</h2>
-      <button class="btn" onclick="handleLogout(event)">Yes</button>
-      <button data-close-modal>No</button>
-    </dialog>
-    {{else}}
-    <button id="logout" class="btn">Login</button>
-    {{/if}}
-    <a href="/profile/{{user.username}}">Profile</a>
+    <button class="btn"><a href="/profile/{{user.username}}">Profile</a></button>
+    {{!-- LOGOUT MODAL --}}
+    <button data-open-modal-logout class="btn">Logout</button>
+      <dialog data-modal-logout class="modal">
+        <h2>Logout?</h2>
+        <div class="modal-wrapper logout-modal"> 
+          <button class="btn" onclick="handleLogout(event)">Yes</button>
+          <button class="btn" data-close-modal-logout>No</button>
+        </div>
+      </dialog>
+    {{!-- NEW BUNDL MODAL --}}
+    <button data-open-modal-forum class="btn">New bundl</button>
+     <dialog data-modal-newforum class="modal">
+        <h2>New Sub-bundl</h2>
+        <p></p>
+        <div class="modal-wrapper forum-modal"> 
+          <button class="btn" onclick="handleLogout(event)">Yes</button>
+          <button class="btn" data-close-modal-forum>Cancel</button>
+        </div>
+      </dialog>
   </nav>
 
-{{{body}}}
+    {{{body}}}
 
+  {{else}}
+
+    {{{body}}}
+
+  {{/if}}
 <footer>
 </footer>
-
+{{#if logged_in}}
+  <script src="../js/script.js"></script>
+{{/if}}
 </body>
-  <script src="./js/script.js"></script>
 </html>

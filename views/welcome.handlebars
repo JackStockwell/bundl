@@ -1,48 +1,40 @@
-<section>
-    <h1>Bundl</h1>
-    {{!-- BRIEF DESC --}}
-    <p>Introducing the ultimate online hub for connecting people through shared interests and stimulating discussions. Are you seeking a platform that truly values community engagement? Look no further. Bundl is here to revolutionise the way you connect, share, and explore topics that matter to you. Try Bundl today</p>
+<section class="welcome-wrapper">
+    <section class="title">
+        <img src="./assets/icons/bundl-icon.svg" alt="Image of a bundle sack bag">
+        <h1>bundl</h1>
+    </section>
+    <section class="hero">
+        {{!-- BRIEF DESC --}}
+        <h2>Who are we?</h2>
+        <p>Introducing the ultimate online hub for connecting people through shared interests and stimulating discussions. Are you seeking a platform that truly values community engagement? Look no further. Bundl is here to revolutionise the way you connect, share, and explore topics that matter to you. Try Bundl today</p>
+    </section>
+
+    <section class="login-wrapper">
+        <div class="form-wrapper">
+            <div class="profile-login">
+                <h2 class="sign-in">Sign In to bundl</h2>
+                <form class="login-form" onsubmit="handleLogin(event)">
+                    <input class="form-input" type="text" id="email-login" placeholder="Email">
+                    <input class="form-input" type="password" id="password-login" placeholder="Password">
+                    <button onclick="handleLogin(event)" class="testbtn">Login</button>
+                </form>
+            </div>
+
+            <div class="profile-signup">
+                <h2 class="sign-up">Create an account</h2>
+                <form class="signup-form" onsubmit="handleSignup(event)">
+                    <input class="form-input" type="text" id="username-signup" placeholder="Username">
+                    <input class="form-input" type="text" id="email-signup" placeholder="Email">
+                    <input class="form-input" type="password" id="password-signup" placeholder="Password">
+                    <input class="form-input" type="password" id="confirm-signup" placeholder="Confirm password">
+                    <span id="error-span" style="color:red;"></span>
+                    <button onClick="handleSignup(event)" class="btn">Sign-Up</button>
+                </form>
+            </div>
+        </div>
+    </section>
 </section>
 
-<div class="wrapper">
-    <div class="profile-login">
-        <h2 class="sign-in">Sign In to Your Profile</h2>
-        <form class="login-form" onsubmit="handleLogin(event)">
-            <div class="info-format">
-                <input class="form-input" type="text" id="email-login" placeholder="Email">
-            </div>
-            <div class="info-format">
-                <input class="form-input" type="password" id="password-login" placeholder="Password">
-            </div>
-            <div class="info-format">
-                <button onclick="handleLogin(event)">Login</button>
-            </div>
-        </form>
-    </div>
-
-
-    <div class="profile-signup">
-        <h2 class="sign-up">Sign Up For a Profile Today!</h2>
-        <form class="signup-form" onclick="handleSignup(event)">
-            <div class="info-format">
-                <input class="form-input" type="text" id="username-signup" placeholder="Username">
-            </div>
-            <div class="info-format">
-                <input class="form-input" type="text" id="email-signup" placeholder="Email">
-            </div>
-            <div class="info-format">
-                <input class="form-input" type="password" id="password-signup" placeholder="Password">
-            </div>
-            <div class="info-format">
-                <input class="form-input" type="password" id="confirm-signup" placeholder="Confirm password">
-                <span id="error-span" style="color:red;"></span>
-            </div>
-            <div class="info-format">
-                <button onClick="handleSignup(event)">Sign-Up</button>
-            </div>
-        </form>
-    </div>
-</div>
-<script src="./js/login.js">
+<script src="../js/login.js"></script>
       
 

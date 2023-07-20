@@ -1,9 +1,17 @@
-<section>
-    <h2>{{user.username}}</h2>
+<header>
+    <section>
+        <h2>Welcome back <i>{{user.username}}</i></h2>
+    </section>
+</header>
+
+
+
+<main class="forum-wrapper">
 
     <section class="post-container">    
         {{#each posts as |post|}}
         {{> post-timeline}}
         {{/each}}
     </section>
-</section>
+    
+</main>

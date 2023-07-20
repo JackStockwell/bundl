@@ -13,15 +13,60 @@ const handleLogout = async () => {
     }
 };
 
-  
-const openModal = document.querySelector('[data-open-modal]')
-const closeModal = document.querySelector('[data-close-modal]')
-const modal = document.querySelector('[data-modal]')
 
-openModal.addEventListener('click', () => {
-    modal.showModal()
+const newPost = async (event) => {
+    event.preventDefault();
+
+    const title = document.querySelector('#postTitle').value.trim();
+    const content = document.querySelector('#postContent').value.trim();
+    const forum_id = document.querySelector('[data-forum_id]').getAttribute('data-forum_id');
+    const user_id = document.querySelector('[data-user_id]').getAttribute('data-user_id');
+
+    console.log(newPost)
+
+    const response = await fetch('/api/post/', {
+        method: 'POST',
+        body: JSON.stringify({title, content, forum_id, user_id}),
+        headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+        location.reload()
+    } else {
+        alert(response.statusText)
+    }
+
+}
+
+// Logout modal
+
+// Modal selectors
+const openLogoutModal = document.querySelector('[data-open-modal-logout]')
+const closeLogoutModal = document.querySelector('[data-close-modal-logout]')
+const logoutModal = document.querySelector('[data-modal-logout]')
+
+// Opens the modal
+openLogoutModal.addEventListener('click', () => {
+    logoutModal.showModal()
 })
 
-closeModal.addEventListener('click', () => {
-    modal.close()
+// Close the modal
+closeLogoutModal.addEventListener('click', () => {
+    logoutModal.close()
+})
+
+// New Forum modal
+
+const openForumModal = document.querySelector('[data-open-modal-forum]')
+const closeForumModal = document.querySelector('[data-close-modal-forum]')
+const forumModal = document.querySelector('[data-modal-newforum]')
+
+// Opens the modal
+openForumModal.addEventListener('click', () => {
+    forumModal.showModal()
+})
+
+// Close the modal
+closeForumModal.addEventListener('click', () => {
+    forumModal.close()
 })

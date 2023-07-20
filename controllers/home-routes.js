@@ -1,12 +1,8 @@
 const router = require('express').Router();
 const withAuth = require('../utils/auth')
 const { User, Post, Forum, UserForum } = require('../models');
-const { findOne } = require('../models/User');
-
 
 router.get('/', withAuth, async (req, res) => {
-
-  console.log(req.session)
 
   try {
     const userData = await User.findOne({
@@ -30,12 +26,10 @@ router.get('/', withAuth, async (req, res) => {
 
     const posts = postData.map((post) => post.toJSON());
 
-    console.log(user)
 
-    res.render(
-      'home',
+    res.render('home',
       {user, posts, logged_in: req.session.logged_in}
-      )
+    )
 
     // res.status(200).json(posts)
 
@@ -44,7 +38,7 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
-router.get('/profile/:name', async (req, res) => {
+router.get('/profile/:name', withAuth, async (req, res) => {
 
   try {
     const userData = await User.findOne({
@@ -68,7 +62,7 @@ router.get('/profile/:name', async (req, res) => {
   }
 });
 
-router.get('/b/:name', async (req, res) => {
+router.get('/b/:name', withAuth, async (req, res) => {
 
   try {
     const namedForum = await Forum.findOne({
@@ -76,9 +70,11 @@ router.get('/b/:name', async (req, res) => {
         name: req.params.name 
       },
       include: [
-        { model: Post }
+        { model: Post },
       ]
     });
+
+    const forum_id = namedForum.id
 
     if (!namedForum) {
       return res.status(404).json({
@@ -86,7 +82,13 @@ router.get('/b/:name', async (req, res) => {
       })
     }
 
-    res.status(200).json(namedForum)
+    res.render('forum', {
+      namedForum,
+      user_id: req.session.user_id,
+      forum_id: forum_id,
+      logged_in: req.session.logged_in
+    })
+
   } catch (err) {
     res.status(500).json({
       message: "Something went wrong!",
@@ -95,7 +97,7 @@ router.get('/b/:name', async (req, res) => {
   }
 });
 
-router.get('/s/:name/:post', async (req, res) => {
+router.get('/b/:name/:post', async (req, res) => {
   const params = {
     name: req.params.name,
     id: req.params.post
@@ -117,7 +119,7 @@ router.get('/s/:name/:post', async (req, res) => {
 });
 
 router.get('/welcome', (req, res) => {
-  if (req.session.loggedIn) {
+  if (req.session.logged_in) {
     res.redirect('/');
     return;
   }
