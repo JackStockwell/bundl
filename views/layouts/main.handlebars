@@ -28,7 +28,9 @@
      <dialog data-modal-newforum class="modal">
         <h2>New Sub-bundl</h2>
         <p></p>
-        <div class="modal-wrapper forum-modal"> 
+        <div class="modal-wrapper forum-modal">
+          <input type="text" data-bundl-name placeholder="Sub-bundl name">
+          <input type="text" placeholder="Brief description">
           <button class="btn" onclick="handleLogout(event)">Yes</button>
           <button class="btn" data-close-modal-forum>Cancel</button>
         </div>
@@ -44,6 +46,17 @@
 
   {{/if}}
 <footer>
+  <section class="foot-contacts">
+    <ul>
+      <li>Test</li>
+      <li>Test2</li>
+    </ul>
+  </section class="foot-bundls">
+
+  <section>
+
+  </section>
+
 </footer>
 {{#if logged_in}}
   <script src="../js/script.js"></script>

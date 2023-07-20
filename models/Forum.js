@@ -16,6 +16,8 @@ Forum.init(
 			allowNull: false,
 			unique: true,
 			validate: {
+				is: /^[a-z]+$/i,
+				len: [2, 32],
 				isNull: {
 					msg: "Cannot be empty!"
 				},

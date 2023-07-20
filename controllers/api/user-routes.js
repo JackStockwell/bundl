@@ -1,9 +1,8 @@
 const router = require('express').Router();
 const { User, Post, Forum, UserForum } = require('../../models');
+const uploadAvatar = require('../../middleware')
 
 router.post('/create', async (req, res) => {
-
-  console.log(req.session)
   
   try {
     const userData = await User.create(req.body);
@@ -13,8 +12,6 @@ router.post('/create', async (req, res) => {
         message: "Post not found",
       })
     }
-
-    console.log(userData)
 
     req.session.save(() => {
       req.session.user_id = userData.id;
@@ -74,6 +71,13 @@ router.post('/login', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
+router.post('/avatar', uploadAvatar.single('bundl-blog'), async (req, res) => {
+  console.log(req.file)
+  
+  res.send('Upload complete')
+})
 
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {

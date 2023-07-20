@@ -241,6 +241,18 @@ h1 {
   background: var(--dark-bg);
   padding: 1rem;
 }
+
+/* FOOTER */
+
+footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--darkbg-2);
+  width: 100%;
+  justify-items: center;
+}
+
+
   
 /* MEDIA QUERIES */
 

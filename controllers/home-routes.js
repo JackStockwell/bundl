@@ -4,6 +4,7 @@ const { User, Post, Forum, UserForum } = require('../models');
 
 router.get('/', withAuth, async (req, res) => {
 
+  // Finds a user based on the signed in 
   try {
     const userData = await User.findOne({
       where: {
@@ -14,6 +15,7 @@ router.get('/', withAuth, async (req, res) => {
 
     const user = userData.toJSON();
 
+    // 
     const postData = await Post.findAll({
       include: [
         {model: Forum},
@@ -27,7 +29,7 @@ router.get('/', withAuth, async (req, res) => {
 
     const posts = postData.map((post) => post.toJSON());
 
-
+    // Renders the home hb with the data parsed.
     res.render('home',
       {user, posts, logged_in: req.session.logged_in}
     )
@@ -99,10 +101,6 @@ router.get('/b/:name', withAuth, async (req, res) => {
     }
     
     const forum = namedForum.toJSON();
-    const posts = namedForum.posts.map((post) => post.toJSON())
-
-    console.log(forum)
-    console.log(posts)
 
     res.render('forum', {
       forum,
@@ -125,7 +123,7 @@ router.get('/b/:name/:post', async (req, res) => {
     name: req.params.name,
     id: req.params.post
   }
-  console.log(params)
+
   try {
     const activePost = await Post.findOne({
       where: {
