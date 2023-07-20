@@ -78,7 +78,12 @@ router.get('/b/:name', withAuth, async (req, res) => {
         name: req.params.name 
       },
       include: [
-        {model: Post}
+        {
+          model: Post,
+          include: [
+            User
+          ]
+        }
       ]
     });
 
