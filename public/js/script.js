@@ -19,19 +19,14 @@ const newPost = async (event) => {
 
     const title = document.querySelector('#postTitle').value.trim();
     const content = document.querySelector('#postContent').value.trim();
-    const user_id = document.querySelector('[data-user_id]').getAttribute('data-user_id');
     const forum_id = document.querySelector('[data-forum_id]').getAttribute('data-forum_id');
+    const user_id = document.querySelector('[data-user_id]').getAttribute('data-user_id');
 
-    const newPost = {
-        title: title,
-        content: content,
-        forum_id: forum_id,
-        user_id: user_id
-    }
+    console.log(newPost)
 
     const response = await fetch('/api/post/', {
         method: 'POST',
-        body: JSON.stringify({title, content, user_id, forum_id}),
+        body: JSON.stringify({title, content, forum_id, user_id}),
         headers: { 'Content-Type': 'application/json' },
     });
 
