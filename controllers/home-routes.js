@@ -46,7 +46,12 @@ router.get('/profile/:name', withAuth, async (req, res) => {
       where: {username: req.params.name},
       attributes: ['id', 'username'],
       include: [
-        {model: Post}
+        {
+          model: Post,
+          include: [
+            Forum
+          ]
+        }
       ]
     })
 
@@ -78,7 +83,12 @@ router.get('/b/:name', withAuth, async (req, res) => {
         name: req.params.name 
       },
       include: [
-        {model: Post}
+        {
+          model: Post,
+          include: [
+            User
+          ]
+        }
       ]
     });
 
