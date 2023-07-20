@@ -18,8 +18,14 @@
 
     <section class="forum-wrapper">
         <section>
-            <p id="username-handle" data-username="{{user.id}}">{{user.username}}</p>
-            <button type="button" id="follow-user" class="follow-btn">Follow</button>
+            <p id="username-handle" data-username="{{user.id}}">{{forum.name}}</p>
+            <button class="btn" type="button" id="follow-user">Follow</button>
         </section>
+    </section>
+
+    <section class="post-container">
+        {{#each forum.posts as |post|}}
+        {{> post-timeline}}
+        {{/each}}
     </section>
 </main>
