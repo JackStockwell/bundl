@@ -13,7 +13,6 @@ const handleLogout = async () => {
     }
 };
 
-
 const newPost = async (event) => {
     event.preventDefault();
 
@@ -54,6 +53,14 @@ const followForum = async (event) => {
       } else {
         alert(response.statusText);
       }
+}
+
+const addAvatar = async (event) => {
+    event.preventDefault();
+
+    
+    const file = document.querySelector(['data-file'])
+    const formData = new FormData()
 }
 
 // Logout modal

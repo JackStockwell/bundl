@@ -43,9 +43,7 @@ const handleSignup = async (event) => {
       headers: { 'Content-Type': 'application/json' },
     });
     
-    console.log(response)
     if (response.ok) {
-      console.log(response)
       document.location.replace('/');
     } else {
       const PWerror= document.getElementById("error-span")
