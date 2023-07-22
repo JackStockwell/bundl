@@ -2,16 +2,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500&display=swap');
 
-
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
-
 :root {
   --light-text: #CEDDEF;
   --dark-bg: #5782C9;
@@ -22,6 +12,18 @@ body {
   --lightbg: #5782C9;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--light-text);
+}
+
+/* MAIN */
+
 /* NAVIGATION */
 
 nav {
@@ -31,7 +33,7 @@ nav {
   grid-template-columns: 1fr;
   width: 100%;
   height: fit-content;
-  padding: 0.5rem;
+  padding: 0.5rem 0px;
   background: var(--dark-bg);
   box-shadow: 0 4px 7px rgba(0, 0, 0, 0.389);
   justify-items: center;
@@ -80,16 +82,6 @@ a:any-link {
   grid-template-columns: 1fr;
   align-items: start;
   justify-items: center;
-}
-
-/* STANDARD WRAPPER */
-
-.forum-wrapper { 
-  display: grid;
-  grid-template-columns: 1fr;
-  max-width: 100em;
-  width: 90vw;
-  padding: 10px;
 }
 
 /* HERO */
@@ -185,6 +177,43 @@ h1 {
 .button-container {
   display: flex;
   justify-content: space-between;
+}
+
+
+
+
+
+/* FORUM/PROFILE CSS */
+
+/* FORUM HEADER */
+
+.forum-header {
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+}
+
+.forum-title {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.profile-img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+/* STANDARD WRAPPER */
+
+.forum-wrapper { 
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 100em;
+  width: 90vw;
+  padding: 10px;
+  background-color: var(--darkbg);
 }
 
 /* BUTTON */

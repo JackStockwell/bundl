@@ -46,7 +46,7 @@ router.get('/profile/:name', withAuth, async (req, res) => {
   try {
     const userData = await User.findOne({
       where: {username: req.params.name},
-      attributes: ['id', 'username'],
+      attributes: ['id', 'username', 'avatar'],
       include: [
         {
           model: Post,

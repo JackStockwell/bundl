@@ -55,14 +55,6 @@ const followForum = async (event) => {
       }
 }
 
-const addAvatar = async (event) => {
-    event.preventDefault();
-
-    
-    const file = document.querySelector(['data-file'])
-    const formData = new FormData()
-}
-
 // Logout modal
 
 // Modal selectors

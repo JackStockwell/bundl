@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { User, Post, Forum, UserForum } = require('../../models');
-const { uploadAvatar, s3 } = require('../../middleware/awsconnect.js')
 const withAuth = require('../../utils/helpers')
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid')
@@ -75,32 +74,37 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// AVATAR PIC
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./avatar-uploads")
+    cb(null, "public/assets/avatar-uploads")
   },
   filename: (req, file, cb) => {
-    console.log(req.session)
-    cb(null, `${req.session.user_id}-${uuidv4()}`)
+    const fileType = file.originalname.split('.').slice(-1)[0]
+    cb(null, `${uuidv4()}-.${fileType}`)
   }
 })
 
-const upload = multer({ storage: storage })
+const upload = multer({ 
+  storage: storage,
+  limits:
+    {fileSize: 4000000} 
+  })
 
 router.post('/upload/avatar', upload.single('image'), async (req, res) => {
   try {
-
     if (!req.session.user_id) {
       res.status(401).send("You must be logged in to upload a file!")
     }
-
-    console.log(req.file)
 
     const addAvatar = await User.update({avatar: req.file.filename}, {
       where: {
         id: req.session.user_id
       }
     })
+
+    res.redirect(req.get('referer'));
 
   } catch (err) {
     res.status(500).json(err)
