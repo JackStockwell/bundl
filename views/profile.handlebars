@@ -16,16 +16,22 @@
         </section>
     </header>
     <nav class="profile-nav">
-        <button class="btn">All posts</button>
+        <button class="btn-dark">All posts</button>
     </nav>
     <section class="forum-main">
         <section class="post-container">
             {{#each posts as |post|}}
             {{> post-timeline}}
             {{/each}}
-        </section>
+        </section> 
         <aside>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, fugit?</p>
+            <section class="bundl-list">
+                <h2>My bundls</h2>
+                <hr>
+                {{#each user.forums as |forum|}}
+                {{> forum-list}}
+                {{/each}}
+            </section>
         </aside>
     </section>
 </main>

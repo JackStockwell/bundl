@@ -1,30 +1,54 @@
-<header>
-    <section>
-        <h2 data-forum_id="{{forum.id}}">{{forum.name}}</h2>
-    </section>
-</header>
-
-<main>
-    {{!-- POST FORM CONTAINER --}}
-    <section class="new-post">
-        <form onsubmit="newPost(event)">
-            <input type="text" name="title" id="postTitle">
-            <input type="text" name="content" id="postContent">
-            <input onclick="newPost(event)" type="submit" class="btn" value="Post">
-        </form>
-        <p class="post-err"></p>
-    </section>
-
-    <section class="forum-wrapper">
-        <section>
-            <p id="username-handle">{{forum.name}}</p>
-            <button class="btn" onclick="followForum(event)" id="follow-user">Follow</button>
+<main class="forum-wrapper">
+    <header class="forum-header">
+        <section class="forum-title">
+            <h2 data-forum_id="{{forum.id}}">/b/{{forum.name}}</h2>
+            <p>{{forum.description}}</p>
         </section>
-    </section>
+    </header>
+    <nav class="profile-nav">
+        <button class="btn-dark">All posts</button>
+    </nav>
 
-    <section class="post-container">
-        {{#each forum.posts as |post|}}
-        {{> post-timeline}}
-        {{/each}}
+        {{!-- POST FORM CONTAINER --}}
+    <section class="forum-main">
+        <section class="post-container">
+            {{#each forum.posts as |post|}}
+            {{> post-timeline}}
+            {{/each}}
+        </section>
+        <aside>
+            <section>
+                <button data-open-post class="btn">New Post</button>
+                <dialog data-modal-post class="modal">
+                    <form onsubmit="newPost(event)">
+                        <p class="post-err"></p>
+                        <div class="modal-input">
+                            <input type="text" name="title" id="postTitle" placeholder="Title">
+                            <input type="text" name="content" id="postContent" placeholder="Your new post!">    
+                        </div>
+
+                        <div class="modal-confirm">
+                            <input onclick="newPost(event)" type="submit" class="btn" value="Post">
+                            <button class="btn" data-close-post>Cancel</button>    
+                        </div>
+                    </form>
+                </dialog>
+            </section>
+                {{#isFollow user.forums forum.id}}
+
+                {{else}}
+                    <p id="username-handle">{{forum.name}}</p>
+                    <button class="btn" onclick="followForum(event)" id="follow-user">Follow</button>
+                {{/isFollow}}
+            <section class="bundl-list">
+                <h2>My bundls</h2>
+                <hr>
+                {{#each user.forums as |forum|}}
+                {{> forum-list}}
+                {{/each}}
+            </section>
+        </aside>
     </section>
+    
+<script src="../js/newPost.js"></script>
 </main>

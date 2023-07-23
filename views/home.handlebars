@@ -1,21 +1,28 @@
-<header>
-    <section>
-        <h2>Welcome back <i>{{user.username}}</i></h2>
-    </section>
-</header>
-
-
-
 <main class="forum-wrapper">
-
-    <section class="post-container">    
-        {{#each posts as |post|}}
-        {{> post-timeline}}
-        {{/each}}
+    <header class="forum-header">
+        <section>
+            <div class="forum-title">
+                <h2 data-user_id="{{user.id}}">{{user.username}}</h2>
+            </div>
+        </section>
+    </header>
+    <nav class="profile-nav">
+        <button class="btn-dark">All posts</button>
+    </nav>
+    <section class="forum-main">
+        <section class="post-container">
+            {{#each posts as |post|}}
+            {{> post-timeline}}
+            {{/each}}
+        </section> 
+        <aside>
+            <section class="bundl-list">
+                <h2>My bundls</h2>
+                <hr>
+                {{#each user.forums as |forum|}}
+                {{> forum-list}}
+                {{/each}}
+            </section>
+        </aside>
     </section>
-
-    <aside>
-        
-    </aside>
-    
 </main>

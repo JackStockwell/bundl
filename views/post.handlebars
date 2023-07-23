@@ -1,5 +1,79 @@
-<header>
-    <section>
-        <h2 data-forum_id="{{forum.id}}">{{forum.name}}</h2>
+<main class="forum-wrapper">
+        <header class="forum-header">
+            <section class="forum-title">
+                <a href=""><h2 data-forum_id="{{post.forum.id}}">/b/{{post.forum.name}}</h2></a>
+                <p>{{forum.description}}</p>
+            </section>
+        </header>
+        <nav class="profile-nav">
+            <button class="btn-dark">All posts</button>
+        </nav>
+        <section class="forum-main">
+
+        <div>        
+            {{!-- ACTIVE POST --}}
+            <section class="post" data-postid="{{post.id}}">
+                <div class="post-title-div">
+                    <h3 class="post-title">{{post.title}}</h3>
+                </div>
+                <hr>
+                <p>{{post.content}}</p>
+                <hr>
+                <div class="post-info-div">
+                    <div class="user-info">
+                        <a href="/p/{{post.user.username}}">
+                            <img class="user-img" src="http://localhost:3001/assets/avatar-uploads/{{post.user.avatar}}" alt="User's profile pic">
+                            <p>{{post.user.username}}</p>
+                        </a>
+                    </div>
+                    <p class="date-made"> <i>Posted: {{formatDate post.date_created}}</i></p>
+                </div>
+            </section>
+            {{!-- COMMENTS --}}
+            <section class="comment-box">
+                <h3>Comment</h3>
+                <input data-comment type="text" name="comment" class="comment-box" placeholder="Comment..">
+                <input type="button" class="btn-dark" onchange="newComment(event)" value="Comment">
+            </section>
+
+            <section class="post-container">
+                {{#each comments as |comment|}}
+                {{> comments}}
+                {{/each}}
+            </section>
+    </div>
+    {{!-- ASIDE --}}
+        <aside>
+            <section>
+                <button data-open-post class="btn">New Post</button>
+                <dialog data-modal-post class="modal">
+                    <form onsubmit="newPost(event)">
+                        <p class="post-err"></p>
+                        <div class="modal-input">
+                            <input type="text" name="title" id="postTitle" placeholder="Title">
+                            <input type="text" name="content" id="postContent" placeholder="Your new post!">    
+                        </div>
+
+                        <div class="modal-confirm">
+                            <input onclick="newPost(event)" type="submit" class="btn" value="Post">
+                            <button class="btn" data-close-post>Cancel</button>    
+                        </div>
+                    </form>
+                </dialog>
+            </section>
+                {{#isFollow user.forums post.forum.id}}
+
+                {{else}}
+                    <p id="username-handle">{{forum.name}}</p>
+                    <button class="btn" onclick="followForum(event)" id="follow-user">Follow</button>
+                {{/isFollow}}
+            <section class="bundl-list">
+                <h2>My bundls</h2>
+                <hr>
+                {{#each user.forums as |forum|}}
+                {{> forum-list}}
+                {{/each}}
+            </section>
+        </aside>
     </section>
-</header>
+

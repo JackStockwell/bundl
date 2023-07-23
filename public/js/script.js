@@ -13,31 +13,6 @@ const handleLogout = async () => {
     }
 };
 
-const newPost = async (event) => {
-    event.preventDefault();
-
-    const title = document.querySelector('#postTitle').value.trim();
-    const content = document.querySelector('#postContent').value.trim();
-    const forum_id = document.querySelector('[data-forum_id]').getAttribute('data-forum_id');
-    
-    if (title && content) {
-        const response = await fetch('/api/post/', {
-            method: 'POST',
-            body: JSON.stringify({title, content, forum_id}),
-            headers: { 'Content-Type': 'application/json' },
-        });
-    
-        if (response.ok) {
-            location.reload()
-        } else {
-            alert(response.statusText)
-        }
-    } else {
-        // Warns user of missing 
-        document.querySelector('.post-err').textContent = "Your post must have a title and post content!"
-    }
-}  
-
 
 const followForum = async (event) => {
     event.preventDefault();
@@ -60,21 +35,26 @@ const followForum = async (event) => {
 const newForum = async (event) => {
     event.preventDefault();
 
-    const name = document.querySelector('[data-bundl-name]').value.trim();
+    const name = document.querySelector('[data-bundl-name]').value.toLowerCase().trim();
     const description = document.querySelector('[data-bundl-desc]').value.trim();
-
-
-    console.log(name, description)
-    const response = await fetch('/api/subs/new', {
-        method: 'POST',
-        body: JSON.stringify({name, description}),
-        headers: { 'Content-Type': 'application/json' },
-    });
-
-    if (response.ok) {
-        document.location.replace(`/b/${name}`)
+    
+    if (name && description) {
+        const response = await fetch('/api/subs/new', {
+            method: 'POST',
+            body: JSON.stringify({name, description}),
+            headers: { 'Content-Type': 'application/json' },
+        });
+    
+        if (response.ok) {
+            document.location.replace(`/b/${name}`)
+        } else {
+            alert(response.statusText)
+        }
     } else {
-        alert(response.statusText)
+        document.querySelector('.post-err').textContent = "Your bundl must have a title and description!"
+        setTimeout(() => {
+            document.querySelector('.post-err').textContent = ""
+        }, 3000)
     }
 
 }
@@ -82,7 +62,6 @@ const newForum = async (event) => {
 
 
 // Logout modal
-
 // Modal selectors
 const openLogoutModal = document.querySelector('[data-open-modal-logout]')
 const closeLogoutModal = document.querySelector('[data-close-modal-logout]')
@@ -99,12 +78,13 @@ closeLogoutModal.addEventListener('click', () => {
 })
 
 // New Forum modal
-
+// Modal selectors
 const openForumModal = document.querySelector('[data-open-modal-forum]')
 const closeForumModal = document.querySelector('[data-close-modal-forum]')
 const forumModal = document.querySelector('[data-modal-newforum]')
 
 // Opens the modal
+
 openForumModal.addEventListener('click', () => {
     forumModal.showModal()
 })

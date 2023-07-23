@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bundl</title>
-  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  <link rel="stylesheet" type="text/css" href="/css/reset.css">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 
 <body>
@@ -26,9 +27,9 @@
         </dialog>
     {{!-- NEW BUNDL MODAL --}}
         <button data-open-modal-forum class="btn">New bundl</button>
-        <dialog data-modal-newforum class="modal">
+        <dialog data-modal-newforum data-modal="new" class="modal">
             <h2>New Sub-bundl</h2>
-            <p></p>
+            <p class="post-err"></p>
             <div class="modal-wrapper forum-modal">
             <input type="text" name="name" data-bundl-name pattern="[a-zA-Z0-9]{3,}" title="Must be 3 or more characters. Letters and Numbers only" placeholder="Sub-bundl name">
             <input type="text" name="description" data-bundl-desc placeholder="Brief description">
@@ -63,7 +64,7 @@
 </footer>
 </main>
   {{#if logged_in}}
-    <script src="../js/script.js"></script>
+    <script src="/js/script.js"></script>
   {{/if}}
 </body>
 </html>

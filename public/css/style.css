@@ -33,7 +33,7 @@ body {
 
 /* MAIN */
 
-/* NAVIGATION */
+/* NAVIGATION BARS */
 
 .main-nav {
   position: sticky;
@@ -49,11 +49,16 @@ body {
   justify-items: center;
 }
 
+.main-nav div {
+  display: flex;
+  gap: 1ch;
+}
+
 /* LINKS */
 
 a {
   text-decoration: none;
-  color: var(--dark-text);
+  color: inherit;
 }
 
 a:any-link {
@@ -66,10 +71,6 @@ a:any-link {
 
 .welcome-wrapper {
   width: 100%;
-}
-
-.welcome-wrapper h2, h3 {
-  text-transform: uppercase;
 }
 
 .welcome-wrapper section:nth-child(odd) {
@@ -125,6 +126,10 @@ h1 {
   font-weight: 400;
   font-size: 3em;
   margin: 10px;
+}
+
+h1, h2, h3, h4, h5 ,h6 {
+  margin: 10px 0;
 }
   
 .container {
@@ -195,6 +200,14 @@ h1 {
 
 /* FORUM/PROFILE CSS */
 
+hr {
+  width: 100%;
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
 /* FORUM HEADER */
 
 .forum-header {
@@ -202,6 +215,7 @@ h1 {
   justify-items: center;
   justify-content: center;
   background: var(--light-blue-bg);
+  padding: var(--padding);
 }
 
 .forum-title {
@@ -232,44 +246,80 @@ h1 {
   display: grid;
   grid-template-columns: 1fr;
   padding: var(--padding) 0;
-  gap: var(--padding);
+  gap: 1rem;
+  align-items: start;
 }
 
 /* PAGE NAV */
 
 .profile-nav {
-  background: var(--dark-text)
+  width: 100%;
+  background: var(--dark-text);
 }
 
 /* ASIDE */
 
 aside {
   order: -1;
-  background: var(--light-blue-bg)
+  background: var(--light-blue-bg);
+  padding: var(--padding);
 }
+
+aside h2, h3 {
+  font-family: var(--text);
+  font-weight: 400;
+}
+
+aside .btn {
+  width: 100%;
+}
+
+.bundl-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: var(--padding) 0;
+  gap: var(--padding);
+}
+
+.bundl-list a {
+  text-align: left;
+  padding: 1ch 0;
+  font-family: var(--text);
+}
+
+
+
 
 /* BUTTON */
 
 .btn,
 .largebtn,
-.btn-light {
+.btn-light,
+.btn-dark {
   cursor: pointer;
-  border: 3px solid transparent;
-  border-radius: var(--padding);
   padding: 1ch 3ch;
   transition: box-shadow 300ms ease;
   color: var(--dark-text);
-  background: var(--light-text);
+  background: transparent;
   box-shadow: inset 0 0 0 0 var(--darkbg-2);
   font-size: 1em;
+  border: 0px;
+  border-bottom: 2px solid var(--light-text);
 }
 
 .btn,
 .btn-light {
-  border-radius: 0;
   background: transparent;
   color: var(--light-text)
 }
+
+.btn-dark,
+.largebtn {
+  background: transparent;
+  color: var(--light-text);
+  box-shadow: inset 0 0 0 0 var(--darkbg);
+}
+
 
 /* MODAL STYLING */
 
@@ -288,6 +338,31 @@ aside {
   display: flex;
   flex-flow: column nowrap;
   gap: var(--padding);
+}
+
+.modal input {
+  padding: 1ch;
+}
+
+.modal .btn {
+  color: black;
+  border-bottom: 2px solid var(--darkbg);
+}
+
+.modal-input {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1ch;
+}
+
+.modal-confirm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+#postContent {
+  height: 100px
 }
 
 /* POST CONTENT */
@@ -314,7 +389,6 @@ aside {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--light-blue-bg);
   border-radius: 1rem;
   padding: 0 var(--padding);
 }
@@ -342,16 +416,27 @@ aside {
 /* USER INFO */
 
 .user-img {
-  max-width: 40px;
-  max-height: 40px;
+  max-width: 30px;
+  max-height: 30px;
   border-radius: 50%;
 }
+
+/* COMMENT BOX */
+
+.comment-box {
+  margin: 1rem 0;
+}
+
+[data-comment] {
+  width: 100%;
+  margin: 0.5ch 0;
+}
+
 
 /* FOOTER */
 
 footer {
   display: grid;
-  position: absolute;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
   bottom: 0;
@@ -401,13 +486,19 @@ footer {
   }
 
   .largebtn:hover {
-    box-shadow: inset -300px 0 0 0 var(--darkbg-2);
-    color: var(--light-text);
+    box-shadow: inset 300px 0 0 0 var(--light-text);
+    color: var(--dark-text);
   }
 
   .btn:hover {
     box-shadow: inset 0 -50px 0 0 var(--darkbg);
+    border-bottom: 2px solid var(--darkbg);
     color: var(--light-text);
+  }
+
+  .btn-dark:hover {
+    box-shadow: inset 0 -50px 0 0 var(--light-text);
+    color: var(--dark-text);
   }
 
   .form-wrapper {
