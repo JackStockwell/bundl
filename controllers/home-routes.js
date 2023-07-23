@@ -3,6 +3,7 @@ const withAuth = require('../utils/auth')
 const { User, Post, Forum, UserForum } = require('../models');
 
 router.get('/', withAuth, async (req, res) => {
+  console.log(req.session)
 
   // Finds a user based on the signed in 
   try {
@@ -14,7 +15,7 @@ router.get('/', withAuth, async (req, res) => {
     });
 
     const user = userData.toJSON();
-
+    console.log(user)
     // 
     const postData = await Post.findAll({
       include: [
@@ -34,6 +35,8 @@ router.get('/', withAuth, async (req, res) => {
       {user, posts, logged_in: req.session.logged_in}
     )
 
+    console.log(posts)
+
     // res.status(200).json(posts)
 
   } catch (err) {
@@ -50,6 +53,7 @@ router.get('/profile/:name', withAuth, async (req, res) => {
       include: [
         {
           model: Post,
+          order: [['date_created', 'DESC']],
           include: [
             {
               model: Forum,
@@ -59,7 +63,7 @@ router.get('/profile/:name', withAuth, async (req, res) => {
               model: User,
               attributes: ['id','username']
             }
-          ]
+          ],
         }
       ]
     })
@@ -98,6 +102,7 @@ router.get('/b/:name', withAuth, async (req, res) => {
       include: [
         {
           model: Post,
+          order: [['date_created', 'DESC']],
           include: [
             {
               model: User,
@@ -107,9 +112,9 @@ router.get('/b/:name', withAuth, async (req, res) => {
               model: Forum,
               attributes: ['id', 'name']
             }
-          ]
+          ],
         }
-      ]
+      ] 
     });
 
     if (!namedForum) {
