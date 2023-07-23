@@ -23,13 +23,13 @@ const followForum = async (event) => {
         method: 'POST',
         body: JSON.stringify({forum_id}),
         headers: { 'Content-Type': 'application/json' },
-      });
-    
-      if (response.ok) {
+        });
 
-      } else {
-        alert(response.statusText);
-      }
+    if (response.ok) {
+    
+    } else {
+    alert(response.statusText);
+    }
 }
 
 const newForum = async (event) => {

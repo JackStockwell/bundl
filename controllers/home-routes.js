@@ -58,7 +58,6 @@ router.get('/p/:name', withAuth, async (req, res) => {
       include: [
         {
           model: Post,
-          order: [['date_created', 'DESC']],
           include: [
             {
               model: Forum,
@@ -74,7 +73,8 @@ router.get('/p/:name', withAuth, async (req, res) => {
           model: Forum,
           attributes: ['id','name']
         }
-      ]
+      ],
+      order: [[Post, 'date_created', 'DESC']],
     })
 
     if (!userData) {
@@ -111,7 +111,6 @@ router.get('/b/:name', withAuth, async (req, res) => {
       include: [
         {
           model: Post,
-          order: [['date_created', 'DESC']],
           include: [
             {
               model: User,
@@ -123,7 +122,8 @@ router.get('/b/:name', withAuth, async (req, res) => {
             }
           ],
         },
-      ] 
+      ],
+      order: [[Post, 'date_created', 'DESC']],
     });
 
     if (!namedForum) {
@@ -169,10 +169,13 @@ router.get('/b/:name/:id', withAuth, async (req, res) => {
     // Active user. Used for logic in posting and follow mechanic
     const userData = await User.findOne({
       where: {id: req.session.user_id},
-      include: Forum
+      attributes: ['id', 'username', 'avatar'],
+      include: [
+        {model: Forum}
+      ]
     })
 
-    const user = userData.toJSON()
+    const user = userData.toJSON();
 
     const postData = await Post.findOne({
       where: {
@@ -182,10 +185,9 @@ router.get('/b/:name/:id', withAuth, async (req, res) => {
         {model: Forum},
         {model: User, attributes: ['id', 'username', 'avatar']}
       ]
-    })
+    });
 
     const post = postData.toJSON()
-    console.log(post)
 
     const commentData = await Comment.findAll({
       where: {
@@ -194,22 +196,29 @@ router.get('/b/:name/:id', withAuth, async (req, res) => {
       include: [
         {model: User, attributes: ['id', 'username', 'avatar']}
       ]
-    })
-    
-    const comments = commentData.map((comment) => comment.toJSON())
-    // res.status(200).json(comments)
-  
-    res.render('post', {
-      user,
-      post,
-      comments,
-      logged_in: req.session.logged_in
-    })
+    });
 
-  } catch (err) {
-    res.status(500).json({
-      message: "Whoops! Something went wrong..."
-    })
+    console.log(commentData)
+
+    if (commentData) {
+      const comments = commentData.map((comment) => comment.toJSON())
+      console.log(comments)
+      res.render('post', {
+        user,
+        post,
+        comments,
+        logged_in: req.session.logged_in
+      })
+    } else {
+      res.render('post', {
+        user,
+        post,
+        logged_in: req.session.logged_in
+      })
+  
+    }
+    } catch (err) {
+    res.status(500).json(err)
   }
 });
 

@@ -1,19 +1,10 @@
 <section class="post" data-comment-id="{{id}}">
-    <div class="post-title-div">
-        <h3 class="post-title">{{title}}</h3>
-        <a href="/b/{{forum.name}}">/b/{{forum.name}}</a>
-    </div>
-    <p>{{content}}</p>
-    <div class="post-info-div">
-        <div class="user-info">
-            <a href="/p/{{user.username}}">
-                <img class="user-img" src="http://localhost:3001/assets/avatar-uploads/{{user.avatar}}" alt="User's profile pic">
-                <p>{{user.username}}</p>
-            </a>
-        </div>
-        <a href="/b/{{forum.name}}/{{id}}">
-            View Comments
+    <div class="user-info">
+        <a href="/p/{{user.username}}">
+            <img class="user-img" src="http://localhost:3001/assets/avatar-uploads/{{user.avatar}}" alt="User's profile pic">
+            <p>{{user.username}}</p>
         </a>
         <p class="date-made"> <i>Posted: {{formatDate date_created}}</i></p>
-    </div>    
+    </div>
+        <p>{{comment}}</p>
 </section>

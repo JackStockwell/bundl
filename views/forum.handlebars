@@ -24,12 +24,12 @@
                         <p class="post-err"></p>
                         <div class="modal-input">
                             <input type="text" name="title" id="postTitle" placeholder="Title">
-                            <input type="text" name="content" id="postContent" placeholder="Your new post!">    
-                        </div>
-
-                        <div class="modal-confirm">
-                            <input onclick="newPost(event)" type="submit" class="btn" value="Post">
-                            <button class="btn" data-close-post>Cancel</button>    
+                            <textarea type="text" name="content" id="postContent" placeholder="Your new post!"></textarea>   
+                        
+                            <div class="modal-confirm">
+                                <input onclick="newPost(event)" type="submit" class="btn" value="Post">
+                                <button class="btn" data-close-post>Cancel</button>    
+                            </div>
                         </div>
                     </form>
                 </dialog>

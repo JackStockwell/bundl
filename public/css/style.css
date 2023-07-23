@@ -13,7 +13,7 @@
 }
 
 body {
-  display: block;
+  display: flex;
   flex-direction: column;
   min-height: 100vh;
   align-items: center;
@@ -53,6 +53,16 @@ body {
   display: flex;
   gap: 1ch;
 }
+
+.profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.profile-btn img {
+  border: 2px solid var(--light-text);
+}
+
 
 /* LINKS */
 
@@ -194,7 +204,11 @@ h1, h2, h3, h4, h5 ,h6 {
   justify-content: space-between;
 }
 
-
+textarea {
+  resize: none;
+  padding: 0;
+  margin: 0;
+}
 
 
 
@@ -277,8 +291,8 @@ aside .btn {
 .bundl-list {
   display: grid;
   grid-template-columns: 1fr;
-  margin: var(--padding) 0;
   gap: var(--padding);
+  text-align: center;
 }
 
 .bundl-list a {
@@ -297,7 +311,7 @@ aside .btn {
 .btn-light,
 .btn-dark {
   cursor: pointer;
-  padding: 1ch 3ch;
+  padding: 1ch 2ch;
   transition: box-shadow 300ms ease;
   color: var(--dark-text);
   background: transparent;
@@ -319,7 +333,6 @@ aside .btn {
   color: var(--light-text);
   box-shadow: inset 0 0 0 0 var(--darkbg);
 }
-
 
 /* MODAL STYLING */
 
@@ -378,19 +391,16 @@ aside .btn {
   grid-template-columns: 1fr;
   background: var(--light-text);
   padding: 0.75rem;
-  border-radius: 1rem;
 }
 
 
 /* POST TITLE */
 .post-title-div,
-.post-info-div,
-.user-info a {
+.post-info-div {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 1rem;
-  padding: 0 var(--padding);
 }
 
 .post-title-div h3 {
@@ -415,7 +425,18 @@ aside .btn {
 
 /* USER INFO */
 
+.user-info {
+  display: flex;
+}
+
+.user-info a {
+  display: flex;
+  align-items: center;
+}
+
 .user-img {
+  width: 30px;
+  height: 30px;
   max-width: 30px;
   max-height: 30px;
   border-radius: 50%;
@@ -423,15 +444,20 @@ aside .btn {
 
 /* COMMENT BOX */
 
-.comment-box {
+.comment-div {
+  display: grid;
   margin: 1rem 0;
+  grid-template-columns: 1fr;
+  gap: var(--padding)
 }
 
 [data-comment] {
   width: 100%;
-  margin: 0.5ch 0;
 }
 
+.comment-box .btn-dark {
+  float: right;
+}
 
 /* FOOTER */
 
@@ -439,12 +465,24 @@ footer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
-  bottom: 0;
-  height: 5rem;
+  margin-top: auto;
+  height: fit-content;
   background: var(--darkbg-2);
   width: 100%;
 }
 
+footer h3 {
+  text-align: center;
+}
+
+.gh-contact {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1ch;
+  list-style-type: none;
+  margin-inline: 0;
+  padding: 0;
+}
 
   
 /* MEDIA QUERIES */

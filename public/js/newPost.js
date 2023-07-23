@@ -24,13 +24,41 @@ const newPost = async (event) => {
             headers: { 'Content-Type': 'application/json' },
         });
     
+    if (response.ok) {
+        location.reload()
+    } else {
+        alert(response.statusText)
+    }
+    } else {
+        // Warns user of missing 
+        document.querySelector('.post-err').textContent = "Your post must have a title and post content!"
+    }
+}
+
+const newComment = async (event) => {
+
+    console.log("Click")
+
+
+
+    event.preventDefault();
+
+    const comment = document.querySelector('[data-comment]').value.trim();
+    const post_id = document.querySelector('[data-postid]').getAttribute('data-postid');
+    console.log(comment, post_id)
+    if (comment && post_id) {
+        const response = await fetch('/api/comment/', {
+            method: 'POST',
+            body: JSON.stringify({comment, post_id}),
+            headers: { 'Content-Type': 'application/json' },
+        })
+
         if (response.ok) {
             location.reload()
         } else {
             alert(response.statusText)
         }
     } else {
-        // Warns user of missing 
-        document.querySelector('.post-err').textContent = "Your post must have a title and post content!"
+        alert("You must have add a comment first!")
     }
-}  
+}
