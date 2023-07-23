@@ -39,7 +39,7 @@ User.init(
     avatar: {
       type: DataTypes.STRING,
       allowNull: true,
-      unique: true,
+      defaultValue: 'default.png',
     },
   },
   {

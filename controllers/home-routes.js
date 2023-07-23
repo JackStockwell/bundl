@@ -3,6 +3,7 @@ const withAuth = require('../utils/auth')
 const { User, Post, Forum, UserForum } = require('../models');
 
 router.get('/', withAuth, async (req, res) => {
+  console.log(req.session)
 
   // Finds a user based on the signed in 
   try {
@@ -14,7 +15,7 @@ router.get('/', withAuth, async (req, res) => {
     });
 
     const user = userData.toJSON();
-
+    console.log(user)
     // 
     const postData = await Post.findAll({
       include: [
@@ -34,6 +35,8 @@ router.get('/', withAuth, async (req, res) => {
       {user, posts, logged_in: req.session.logged_in}
     )
 
+    console.log(posts)
+
     // res.status(200).json(posts)
 
   } catch (err) {
@@ -50,9 +53,17 @@ router.get('/profile/:name', withAuth, async (req, res) => {
       include: [
         {
           model: Post,
+          order: [['date_created', 'DESC']],
           include: [
-            Forum
-          ]
+            {
+              model: Forum,
+              attributes: ['id','name']
+            },
+            {
+              model: User,
+              attributes: ['id','username']
+            }
+          ],
         }
       ]
     })
@@ -66,10 +77,14 @@ router.get('/profile/:name', withAuth, async (req, res) => {
     const user = userData.toJSON()
     const posts = userData.posts.map((post) => post.toJSON())
 
-    res.render(
-      'profile',
-      {user, posts, logged_in: req.session.logged_in, user_id: req.session.user_id}
-      )
+    console.log(posts)
+
+    res.render('profile', {
+      user,
+      posts,
+      logged_in: req.session.logged_in,
+      user_id: req.session.user_id
+    });
     
 
   } catch (err) {
@@ -87,11 +102,19 @@ router.get('/b/:name', withAuth, async (req, res) => {
       include: [
         {
           model: Post,
+          order: [['date_created', 'DESC']],
           include: [
-            User
-          ]
+            {
+              model: User,
+              attributes: ['id', 'username']
+            },
+            {
+              model: Forum,
+              attributes: ['id', 'name']
+            }
+          ],
         }
-      ]
+      ] 
     });
 
     if (!namedForum) {
@@ -99,12 +122,19 @@ router.get('/b/:name', withAuth, async (req, res) => {
         message: "Error 404"
       })
     }
+
+    const userData = await User.findOne({
+      where: {id: req.session.user_id}
+    })
     
+    const user = userData.toJSON();
     const forum = namedForum.toJSON();
+
+    console.log(forum)
 
     res.render('forum', {
       forum,
-      user_id: req.session.user_id,
+      user,
       forum_id: namedForum.id,
       logged_in: req.session.logged_in
     })

@@ -1,6 +1,6 @@
 <header>
     <section>
-        <h2 data-user_id="{{user_id}}" data-forum_id="{{forum_id}}">{{forum.name}}</h2>
+        <h2 data-forum_id="{{forum.id}}">{{forum.name}}</h2>
     </section>
 </header>
 
@@ -10,7 +10,7 @@
         <form onsubmit="newPost(event)">
             <input type="text" name="title" id="postTitle">
             <input type="text" name="content" id="postContent">
-            <button onclick="newPost(event)" type="button">Post</button>
+            <input onclick="newPost(event)" type="submit" class="btn" value="Post">
         </form>
     </section>
 

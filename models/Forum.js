@@ -12,16 +12,9 @@ Forum.init(
 			primaryKey: true,
         },
 		name: {
-			type: DataTypes.STRING,
+			type: DataTypes.STRING(32),
 			allowNull: false,
 			unique: true,
-			validate: {
-				is: /^[a-z]+$/i,
-				len: [2, 32],
-				isNull: {
-					msg: "Cannot be empty!"
-				},
-			}
 		},
 		description: {
 			type: DataTypes.STRING,
