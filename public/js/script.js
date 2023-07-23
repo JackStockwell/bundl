@@ -13,7 +13,6 @@ const handleLogout = async () => {
     }
 };
 
-
 const newPost = async (event) => {
     event.preventDefault();
 

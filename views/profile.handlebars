@@ -1,17 +1,29 @@
-<header>
-    <section>
-        <h2 data-user_id="{{user.user_id}}">{{user.username}}</h2>
+<main class="forum-wrapper">
+    <header class="forum-header">
+        <section>
+            <div class="forum-title">
+                <img class="profile-img" src="http://localhost:3001/assets/avatar-uploads/{{user.avatar}}" alt="">
+                <h2 data-user_id="{{user.id}}">{{user.username}}</h2>
+            </div>
 
+            {{#isEqual user_id user.id}}
+            <form id="avatar-form" action="/api/users/upload/avatar/" method="post" enctype="multipart/form-data">
+                <input data-file type="file" name="image" id="avatar">
+                <input type="submit" value="Upload" onclick="addAvatar(event)">
+            </form>
+            {{/isEqual}}
+
+        </section>
+    </header>
+
+    <section class="forum-main">
+        <section class="post-container">
+            {{#each posts as |post|}}
+            {{> post-timeline}}
+            {{/each}}
+        </section>
+        <aside>
+
+        </aside>
     </section>
-</header>
-
-<main class="forum-main">
-    <section class="post-container">
-        {{#each posts as |post|}}
-        {{> post-timeline}}
-        {{/each}}
-    </section>
-    <aside>
-
-    </aside>
 </main>

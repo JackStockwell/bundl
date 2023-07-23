@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3001;
 const sess = {
     secret: 'Super secret secret',
     cookie: {
-      maxAge: 300000,
+      maxAge: 7200000,
       httpOnly: true,
       secure: false,
       sameSite: 'strict',
@@ -37,6 +37,7 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'avatar-uploads')))
 
 app.use(routes);
 
