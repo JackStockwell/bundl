@@ -5,7 +5,13 @@ router.get('/', async (req, res) => {
     try {
       const forumData = await Forum.findAll({
         include: [
-            {model: Post}
+            {model: Post},
+            {
+              model: User,
+              where: {
+                
+              }
+            }
         ],
       });
   
@@ -22,21 +28,24 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/new', async (req, res) => {
   
   try {
+    console.log(req.body)
 
-    const newForum = {
+    const forumData = await Forum.create({
       name: req.body.name,
       description: req.body.description
-    }
+    });
 
-    const forumData = await Forum.create(newForum)
+    if (!forumData) {
+
+    }
 
     res.status(200).json(forumData)
 
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json({err})
   }
 
 })

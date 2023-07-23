@@ -51,7 +51,14 @@ router.get('/profile/:name', withAuth, async (req, res) => {
         {
           model: Post,
           include: [
-            Forum
+            {
+              model: Forum,
+              attributes: ['id','name']
+            },
+            {
+              model: User,
+              attributes: ['id','username']
+            }
           ]
         }
       ]
@@ -66,10 +73,14 @@ router.get('/profile/:name', withAuth, async (req, res) => {
     const user = userData.toJSON()
     const posts = userData.posts.map((post) => post.toJSON())
 
-    res.render(
-      'profile',
-      {user, posts, logged_in: req.session.logged_in, user_id: req.session.user_id}
-      )
+    console.log(posts)
+
+    res.render('profile', {
+      user,
+      posts,
+      logged_in: req.session.logged_in,
+      user_id: req.session.user_id
+    });
     
 
   } catch (err) {
@@ -88,7 +99,14 @@ router.get('/b/:name', withAuth, async (req, res) => {
         {
           model: Post,
           include: [
-            User
+            {
+              model: User,
+              attributes: ['id', 'username']
+            },
+            {
+              model: Forum,
+              attributes: ['id', 'name']
+            }
           ]
         }
       ]
@@ -99,12 +117,19 @@ router.get('/b/:name', withAuth, async (req, res) => {
         message: "Error 404"
       })
     }
+
+    const userData = await User.findOne({
+      where: {id: req.session.user_id}
+    })
     
+    const user = userData.toJSON();
     const forum = namedForum.toJSON();
+
+    console.log(forum)
 
     res.render('forum', {
       forum,
-      user_id: req.session.user_id,
+      user,
       forum_id: namedForum.id,
       logged_in: req.session.logged_in
     })

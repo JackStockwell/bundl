@@ -1,6 +1,11 @@
 <section class="post" data-postid="{{id}}">
-    <h3 class="post-title">{{title}}</h3>
+    <div class="title-div">
+        <h3 class="post-title">{{title}}</h3>
+        <a href="/b/{{forum.name}}">{{forum.name}}</a>
+    </div>
     <p>{{content}}</p>
-     <a href="/profile/{{user.username}}" target="_blank">{{user.username}}</a>
-    <p class="date-made">{{date_created}}</p>
+    <div>
+        <a href="/profile/{{user.username}}">{{user.username}}</a>
+        <p class="date-made">{{date_created}}</p>
+    </div>    
 </section>

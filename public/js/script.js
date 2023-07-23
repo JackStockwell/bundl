@@ -19,11 +19,10 @@ const newPost = async (event) => {
     const title = document.querySelector('#postTitle').value.trim();
     const content = document.querySelector('#postContent').value.trim();
     const forum_id = document.querySelector('[data-forum_id]').getAttribute('data-forum_id');
-    const user_id = document.querySelector('[data-user_id]').getAttribute('data-user_id');
-
+    
     const response = await fetch('/api/post/', {
         method: 'POST',
-        body: JSON.stringify({title, content, forum_id, user_id}),
+        body: JSON.stringify({title, content, forum_id}),
         headers: { 'Content-Type': 'application/json' },
     });
 
@@ -53,6 +52,28 @@ const followForum = async (event) => {
       } else {
         alert(response.statusText);
       }
+}
+
+const newForum = async (event) => {
+    event.preventDefault();
+
+    const name = document.querySelector('[data-bundl-name]').value.trim();
+    const description = document.querySelector('[data-bundl-desc]').value.trim();
+
+
+    console.log(name, description)
+    const response = await fetch('/api/subs/new', {
+        method: 'POST',
+        body: JSON.stringify({name, description}),
+        headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+        document.location.replace(`/b/${name}`)
+    } else {
+        alert(response.statusText)
+    }
+
 }
 
 // Logout modal

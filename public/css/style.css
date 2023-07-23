@@ -4,12 +4,11 @@
 
 :root {
   --light-text: #CEDDEF;
-  --dark-bg: #5782C9;
-  --dark-text: #456177;
-  --light-text: #CEDDEF;
-  --darkbg-2: #324757;
+  --light-blue-bg: #5782C9;
   --darkbg: #3A68B3;
-  --lightbg: #5782C9;
+  --dark-text: #456177;
+  --darkbg-2: #324757;
+  --padding: 0.75rem;
 }
 
 body {
@@ -33,8 +32,8 @@ nav {
   grid-template-columns: 1fr;
   width: 100%;
   height: fit-content;
-  padding: 0.5rem 0px;
-  background: var(--dark-bg);
+  padding: var(--padding) 0px;
+  background: var(--light-blue-bg);
   box-shadow: 0 4px 7px rgba(0, 0, 0, 0.389);
   justify-items: center;
 }
@@ -153,7 +152,7 @@ h1 {
 .profile-signup form {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: var(--padding);
   min-width: 300px;
 }
 
@@ -178,6 +177,9 @@ h1 {
   display: flex;
   justify-content: space-between;
 }
+
+
+
 
 
 /* FORUM/PROFILE CSS */
@@ -209,41 +211,22 @@ h1 {
   grid-template-columns: 1fr;
   max-width: 100em;
   width: 90vw;
-  padding: 10px;
+  padding: var(--padding);
   background-color: var(--darkbg);
-
-/* CONTENT/POST DETAILS */
-
-.post {
-  justify-content: space-between;
-  flex-direction: row;
 }
 
-.post .date-made , .post a {
-  display: inline;
-} 
-
-.post a {
-  font-size: 35px;
-  color: turquoise;
+.forum-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: var(--padding);
+  gap: var(--padding);
 }
 
-.post .date-made {
-  font-size: 13px;
-  margin-left: 20px
-}
+/* ASIDE */
 
-.post a:hover {
-  
-}
-
-.post a:active {
-
-}
-
-.post a:focus {
-
-
+aside {
+  order: -1;
+  background: var(--light-blue-bg)
 }
 
 /* BUTTON */
@@ -252,7 +235,7 @@ h1 {
 .largebtn {
   cursor: pointer;
   border: 3px solid transparent;
-  border-radius: 0.5rem;
+  border-radius: var(--padding);
   padding: 1ch 3ch;
   transition: box-shadow 300ms ease;
   color: var(--dark-text);
@@ -283,7 +266,7 @@ h1 {
 .modal-wrapper {
   display: flex;
   flex-flow: column nowrap;
-  gap: 1em;
+  gap: var(--padding);
 }
 
 /* POST CONTENT */
@@ -297,8 +280,8 @@ h1 {
 .post {
   display: grid;
   grid-template-columns: 1fr;
-  background: var(--dark-bg);
-  padding: 1rem;
+  background: var(--light-blue-bg);
+  padding: 0.75rem;
 }
 
 /* FOOTER */
@@ -306,9 +289,11 @@ h1 {
 footer {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  bottom: 0;
+  height: 5rem;
   background: var(--darkbg-2);
   width: 100%;
-  justify-items: center;
 }
 
 
@@ -364,5 +349,13 @@ footer {
   .form-wrapper {
     grid-template-columns: 1fr 1fr;
     max-width: 60em;
+  }
+
+  .forum-main {
+    grid-template-columns: 3fr 1fr;
+  }
+
+  aside {
+    order: 2
   }
 }

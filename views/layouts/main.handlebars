@@ -29,9 +29,9 @@
         <h2>New Sub-bundl</h2>
         <p></p>
         <div class="modal-wrapper forum-modal">
-          <input type="text" data-bundl-name placeholder="Sub-bundl name">
-          <input type="text" placeholder="Brief description">
-          <button class="btn" onclick="handleLogout(event)">Yes</button>
+          <input type="text" name="name" data-bundl-name pattern="[a-zA-Z0-9]{3,}" title="Must be 3 or more characters. Letters and Numbers only" placeholder="Sub-bundl name">
+          <input type="text" name="description" data-bundl-desc placeholder="Brief description">
+          <button class="btn" onclick="newForum(event)">Yes</button>
           <button class="btn" data-close-modal-forum>Cancel</button>
         </div>
       </dialog>
