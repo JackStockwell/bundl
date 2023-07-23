@@ -1,6 +1,7 @@
 const User = require('./User.js');
 const Post = require('./Post.js');
 const Forum = require('./Forum.js');
+const Comment = require('./Comment.js')
 const UserForum = require('./UserForum.js');
 
 Forum.hasMany(Post, {
@@ -21,6 +22,14 @@ Post.belongsTo(User, {
     foreignKey: 'user_id'
 });
 
+Comment.belongsTo(Post, {
+    foreignKey: 'post_id'
+});
+
+Comment.belongsTo(User, {
+    foreignKey: 'user_id'
+});
+
 User.belongsToMany(Forum, {
     through: UserForum,
     foreignKey: 'user_id',
@@ -35,5 +44,6 @@ module.exports = {
     Forum,
     Post,
     User, 
-    UserForum
+    UserForum,
+    Comment
 };
