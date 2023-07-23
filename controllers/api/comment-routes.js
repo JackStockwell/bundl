@@ -1,23 +1,7 @@
 const router = require('express').Router();
 const { User, Post, Forum, UserForum, Comment } = require('../../models');
 
-router.get('/', async (req, res) => {
-    try {
-        const commentData = await Comment.findAll();
-
-        console.log(commentData)
-
-        // const comments = commentData.map((comment) => comment.toJSON())
-        
-        console.log(comments)
-
-        res.status(200).json(commentData)
-    } catch (err) {
-        res.status(500).json(err)
-        return
-    }
-})
-
+// POST method request. Creates a newcomment with the parsed body info.
 router.post('/', async (req, res) => {
     try {
         const newComment = {
@@ -28,8 +12,6 @@ router.post('/', async (req, res) => {
     
         const commentData = await Comment.create(newComment)
 
-        console.log(commentData)
-    
         const comments = commentData.toJSON();
     
         res.status(200).json(comments)
@@ -37,8 +19,6 @@ router.post('/', async (req, res) => {
         res.status(500).json(err)
         return
     }
-
-
 })
 
 module.exports = router;
