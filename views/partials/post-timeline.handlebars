@@ -1,11 +1,19 @@
 <section class="post" data-postid="{{id}}">
-    <div class="title-div">
+    <div class="post-title-div">
         <h3 class="post-title">{{title}}</h3>
-        <a href="/b/{{forum.name}}">{{forum.name}}</a>
+        <a href="/b/{{forum.name}}">/b/{{forum.name}}</a>
     </div>
     <p>{{content}}</p>
-    <div>
-        <a href="/profile/{{user.username}}">{{user.username}}</a>
-        <p class="date-made">{{date_created}}</p>
+    <div class="post-info-div">
+        <div class="user-info">
+            <a href="/p/{{user.username}}">
+                <img class="user-img" src="http://localhost:3001/assets/avatar-uploads/{{user.avatar}}" alt="User's profile pic">
+                <p>{{user.username}}</p>
+            </a>
+        </div>
+        <a href="/b/{{forum.name}}/{{id}}">
+            View Comments
+        </a>
+        <p class="date-made">{{formatDate date_created}}</p>
     </div>    
 </section>

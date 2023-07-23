@@ -10,56 +10,60 @@
 
 <body>
   {{#if logged_in}}
-  <nav>
+  <nav class="main-nav">
     <a href="/"><h1>bundl</h1></a>
     <div>
-    <a href="/profile/{{user.username}}" class="btn">{{user.username}}</a>
+    {{!-- Profile Link BTN     --}}
+        <a href="/p/{{user.username}}" class="btn">{{user.username}}</a>
     {{!-- LOGOUT MODAL --}}
-    <button data-open-modal-logout class="btn">Logout</button>
-      <dialog data-modal-logout class="modal">
-        <h2>Logout?</h2>
-        <div class="modal-wrapper logout-modal"> 
-          <button class="btn" onclick="handleLogout(event)">Yes</button>
-          <button class="btn" data-close-modal-logout>No</button>
-        </div>
-      </dialog>
+        <button data-open-modal-logout class="btn">Logout</button>
+        <dialog data-modal-logout class="modal">
+            <h2>Logout?</h2>
+            <div class="modal-wrapper logout-modal"> 
+            <button class="btn" onclick="handleLogout(event)">Yes</button>
+            <button class="btn" data-close-modal-logout>No</button>
+            </div>
+        </dialog>
     {{!-- NEW BUNDL MODAL --}}
-    <button data-open-modal-forum class="btn">New bundl</button>
-     <dialog data-modal-newforum class="modal">
-        <h2>New Sub-bundl</h2>
-        <p></p>
-        <div class="modal-wrapper forum-modal">
-          <input type="text" name="name" data-bundl-name pattern="[a-zA-Z0-9]{3,}" title="Must be 3 or more characters. Letters and Numbers only" placeholder="Sub-bundl name">
-          <input type="text" name="description" data-bundl-desc placeholder="Brief description">
-          <button class="btn" onclick="newForum(event)">Yes</button>
-          <button class="btn" data-close-modal-forum>Cancel</button>
-        </div>
-      </dialog>
+        <button data-open-modal-forum class="btn">New bundl</button>
+        <dialog data-modal-newforum class="modal">
+            <h2>New Sub-bundl</h2>
+            <p></p>
+            <div class="modal-wrapper forum-modal">
+            <input type="text" name="name" data-bundl-name pattern="[a-zA-Z0-9]{3,}" title="Must be 3 or more characters. Letters and Numbers only" placeholder="Sub-bundl name">
+            <input type="text" name="description" data-bundl-desc placeholder="Brief description">
+            <button class="btn" onclick="newForum(event)">Yes</button>
+            <button class="btn" data-close-modal-forum>Cancel</button>
+            </div>
+        </dialog>
     </div>
   </nav>
-
+<main class="main-body">
     {{{body}}}
 
-  {{else}}
 
-    {{{body}}}
+    {{else}}
+
+<main class="main-body">
+  {{{body}}}
 
   {{/if}}
 <footer>
-  <section class="foot-contacts">
-    <ul>
-      <li>Test</li>
-      <li>Test2</li>
-    </ul>
-  </section class="foot-bundls">
+    <section class="foot-contacts">
+        <ul>
+            <li>Test</li>
+            <li>Test2</li>
+        </ul>
+    </section class="foot-bundls">
 
-  <section>
+    <section>
 
-  </section>
+    </section>
 
 </footer>
-{{#if logged_in}}
-  <script src="../js/script.js"></script>
-{{/if}}
+</main>
+  {{#if logged_in}}
+    <script src="../js/script.js"></script>
+  {{/if}}
 </body>
 </html>

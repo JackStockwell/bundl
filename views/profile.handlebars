@@ -2,7 +2,7 @@
     <header class="forum-header">
         <section>
             <div class="forum-title">
-                <img class="profile-img" src="http://localhost:3001/assets/avatar-uploads/{{user.avatar}}" alt="">
+                <img class="profile-img" src="http://localhost:3001/assets/avatar-uploads/{{user.avatar}}" alt="User's profile pic">
                 <h2 data-user_id="{{user.id}}">{{user.username}}</h2>
             </div>
 
@@ -15,7 +15,9 @@
 
         </section>
     </header>
-
+    <nav class="profile-nav">
+        <button class="btn">All posts</button>
+    </nav>
     <section class="forum-main">
         <section class="post-container">
             {{#each posts as |post|}}

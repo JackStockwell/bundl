@@ -9,11 +9,13 @@
   --dark-text: #456177;
   --darkbg-2: #324757;
   --padding: 0.75rem;
+  --text: 'Comfortaa', 'sans-serif';
 }
 
 body {
-  display: flex;
+  display: block;
   flex-direction: column;
+  min-height: 100vh;
   align-items: center;
   justify-content: center;
   margin: 0;
@@ -21,12 +23,21 @@ body {
   background-color: var(--light-text);
 }
 
+.main-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column nowrap;
+
+}
+
 /* MAIN */
 
 /* NAVIGATION */
 
-nav {
+.main-nav {
   position: sticky;
+  top: 0;
   display: grid;
   justify-items: center;
   grid-template-columns: 1fr;
@@ -42,7 +53,7 @@ nav {
 
 a {
   text-decoration: none;
-  color: var(--light-blue-bg);
+  color: var(--dark-text);
 }
 
 a:any-link {
@@ -190,6 +201,7 @@ h1 {
   display: flex;
   justify-items: center;
   justify-content: center;
+  background: var(--light-blue-bg);
 }
 
 .forum-title {
@@ -215,11 +227,18 @@ h1 {
   background-color: var(--darkbg);
 }
 
+
 .forum-main {
   display: grid;
   grid-template-columns: 1fr;
-  padding: var(--padding);
+  padding: var(--padding) 0;
   gap: var(--padding);
+}
+
+/* PAGE NAV */
+
+.profile-nav {
+  background: var(--dark-text)
 }
 
 /* ASIDE */
@@ -232,7 +251,8 @@ aside {
 /* BUTTON */
 
 .btn,
-.largebtn {
+.largebtn,
+.btn-light {
   cursor: pointer;
   border: 3px solid transparent;
   border-radius: var(--padding);
@@ -244,7 +264,8 @@ aside {
   font-size: 1em;
 }
 
-.btn {
+.btn,
+.btn-light {
   border-radius: 0;
   background: transparent;
   color: var(--light-text)
@@ -280,14 +301,57 @@ aside {
 .post {
   display: grid;
   grid-template-columns: 1fr;
-  background: var(--light-blue-bg);
+  background: var(--light-text);
   padding: 0.75rem;
+  border-radius: 1rem;
+}
+
+
+/* POST TITLE */
+.post-title-div,
+.post-info-div,
+.user-info a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--light-blue-bg);
+  border-radius: 1rem;
+  padding: 0 var(--padding);
+}
+
+.post-title-div h3 {
+  overflow: hidden;
+}
+
+.post-title-div a {
+  border: 2px solid black;
+  padding: 1ch;
+  border-radius: 2rem;
+  color: var(--light-text);
+  background-color: var(--darkbg-2);
+}
+/* POST PARA */
+.post p {
+  margin: var(--padding);
+}
+
+.post-info-div {
+  background-color: transparent;
+}
+
+/* USER INFO */
+
+.user-img {
+  max-width: 40px;
+  max-height: 40px;
+  border-radius: 50%;
 }
 
 /* FOOTER */
 
 footer {
   display: grid;
+  position: absolute;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
   bottom: 0;
@@ -322,7 +386,7 @@ footer {
 
 @media(min-width: 60em) {
 
-  nav {
+  .main-nav {
     display: flex;
     align-items: center;
     justify-content: space-evenly;

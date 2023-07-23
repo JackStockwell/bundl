@@ -20,26 +20,29 @@ const newPost = async (event) => {
     const content = document.querySelector('#postContent').value.trim();
     const forum_id = document.querySelector('[data-forum_id]').getAttribute('data-forum_id');
     
-    const response = await fetch('/api/post/', {
-        method: 'POST',
-        body: JSON.stringify({title, content, forum_id}),
-        headers: { 'Content-Type': 'application/json' },
-    });
-
-    if (response.ok) {
-        location.reload()
+    if (title && content) {
+        const response = await fetch('/api/post/', {
+            method: 'POST',
+            body: JSON.stringify({title, content, forum_id}),
+            headers: { 'Content-Type': 'application/json' },
+        });
+    
+        if (response.ok) {
+            location.reload()
+        } else {
+            alert(response.statusText)
+        }
     } else {
-        alert(response.statusText)
+        // Warns user of missing 
+        document.querySelector('.post-err').textContent = "Your post must have a title and post content!"
     }
-
 }  
+
 
 const followForum = async (event) => {
     event.preventDefault();
 
     const forum_id = document.querySelector('[data-forum_id]').getAttribute('data-forum_id');
-
-    console.log(forum_id)
 
     const response = await fetch('/api/subs/follow/', {
         method: 'POST',
@@ -75,6 +78,8 @@ const newForum = async (event) => {
     }
 
 }
+
+
 
 // Logout modal
 

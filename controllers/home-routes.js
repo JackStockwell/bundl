@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const withAuth = require('../utils/auth')
-const { User, Post, Forum, UserForum } = require('../models');
+const { User, Post, Forum, UserForum, Comment } = require('../models');
 
 router.get('/', withAuth, async (req, res) => {
   console.log(req.session)
@@ -44,7 +44,7 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
-router.get('/profile/:name', withAuth, async (req, res) => {
+router.get('/p/:name', withAuth, async (req, res) => {
 
   try {
     const userData = await User.findOne({
@@ -61,7 +61,7 @@ router.get('/profile/:name', withAuth, async (req, res) => {
             },
             {
               model: User,
-              attributes: ['id','username']
+              attributes: ['id','username', 'avatar']
             }
           ],
         }
@@ -106,7 +106,7 @@ router.get('/b/:name', withAuth, async (req, res) => {
           include: [
             {
               model: User,
-              attributes: ['id', 'username']
+              attributes: ['id', 'username', 'avatar']
             },
             {
               model: Forum,
@@ -148,16 +148,12 @@ router.get('/b/:name', withAuth, async (req, res) => {
   }
 });
 
-router.get('/b/:name/:post', async (req, res) => {
-  const params = {
-    name: req.params.name,
-    id: req.params.post
-  }
+router.get('/b/:name/:id', async (req, res) => {
 
   try {
-    const activePost = await Post.findOne({
+    const activePost = await Comment.findAll({
       where: {
-        id: params.id
+        post_id: req.params.id
       }
     })
   
