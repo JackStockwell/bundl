@@ -121,7 +121,7 @@ router.post('/upload/avatar', upload.single('image'), async (req, res) => {
     res.redirect(req.get('referer'));
 
   } catch (err) {
-    res.status(500).json(err)
+    res.redirect(req.get('referer'));
   }
 })
 

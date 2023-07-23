@@ -242,6 +242,7 @@ hr {
   border-radius: 50%;
   width: 150px;
   height: 150px;
+  object-fit: cover;
 }
 
 /* STANDARD WRAPPER */
@@ -447,6 +448,7 @@ aside .btn {
   max-width: 30px;
   max-height: 30px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 /* COMMENT BOX */

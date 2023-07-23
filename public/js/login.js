@@ -13,8 +13,6 @@ const handleLogin = async (event) => {
         headers: {'Content-Type': 'application/json'},
     });
 
-    console.log(response)
-
     if (response.ok) {
         document.location.replace('/')
     } else {
@@ -22,7 +20,6 @@ const handleLogin = async (event) => {
         console.log(response)
     }
   } 
-  console.log("Login Submitted")
 }
 
 // Function to handle sign-up form submission

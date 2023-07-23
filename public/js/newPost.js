@@ -37,15 +37,11 @@ const newPost = async (event) => {
 
 const newComment = async (event) => {
 
-    console.log("Click")
-
-
-
     event.preventDefault();
 
     const comment = document.querySelector('[data-comment]').value.trim();
     const post_id = document.querySelector('[data-postid]').getAttribute('data-postid');
-    console.log(comment, post_id)
+
     if (comment && post_id) {
         const response = await fetch('/api/comment/', {
             method: 'POST',
