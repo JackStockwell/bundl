@@ -68,12 +68,15 @@
                     <p id="username-handle">{{forum.name}}</p>
                     <button class="btn" onclick="followForum(event)" id="follow-user">Follow</button>
                 {{/isFollow}}
-            <section class="bundl-list">
-                <h2>My bundls</h2>
+            <section class="bundl-list-div">
                 <hr>
-                {{#each user.forums as |forum|}}
-                {{> forum-list}}
-                {{/each}}
+                <h2>my bundls</h2>
+                <hr>
+                <div>
+                    {{#each user.forums as |forum|}}
+                    {{> forum-list}}
+                    {{/each}}
+                </div>
             </section>
         </aside>
     </section>

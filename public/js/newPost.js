@@ -25,7 +25,7 @@ const newPost = async (event) => {
         });
     
     if (response.ok) {
-        location.reload()
+        document.location.replace(`/b/deepthoughts`)
     } else {
         alert(response.statusText)
     }
@@ -54,7 +54,7 @@ const newComment = async (event) => {
         })
 
         if (response.ok) {
-            location.reload()
+            document.location.reload()
         } else {
             alert(response.statusText)
         }

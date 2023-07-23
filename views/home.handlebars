@@ -16,12 +16,15 @@
             {{/each}}
         </section> 
         <aside>
-            <section class="bundl-list">
-                <h2>My bundls</h2>
+            <section class="bundl-list-div">
                 <hr>
-                {{#each user.forums as |forum|}}
-                {{> forum-list}}
-                {{/each}}
+                <h2>my bundls</h2>
+                <hr>
+                <div>
+                    {{#each user.forums as |forum|}}
+                    {{> forum-list}}
+                    {{/each}}
+                </div>
             </section>
         </aside>
     </section>
