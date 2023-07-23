@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const withAuth = require('../utils/auth')
-const { User, Post, Forum, UserForum } = require('../models');
+const { User, Post, Forum, UserForum, Comment } = require('../models');
 
 router.get('/', withAuth, async (req, res) => {
   console.log(req.session)
@@ -11,7 +11,12 @@ router.get('/', withAuth, async (req, res) => {
       where: {
         id: req.session.user_id
       },
-      include: Forum
+      include: [
+        {
+          model: Forum,
+          attributes: ['id','name']
+        }
+      ]
     });
 
     const user = userData.toJSON();
@@ -35,16 +40,16 @@ router.get('/', withAuth, async (req, res) => {
       {user, posts, logged_in: req.session.logged_in}
     )
 
-    console.log(posts)
+    console.log(user)
 
-    // res.status(200).json(posts)
+    // res.status(200).json(user)
 
   } catch (err) {
     return res.status(500).json(err)
   }
 });
 
-router.get('/profile/:name', withAuth, async (req, res) => {
+router.get('/p/:name', withAuth, async (req, res) => {
 
   try {
     const userData = await User.findOne({
@@ -61,9 +66,13 @@ router.get('/profile/:name', withAuth, async (req, res) => {
             },
             {
               model: User,
-              attributes: ['id','username']
+              attributes: ['id','username', 'avatar']
             }
           ],
+        },
+        {
+          model: Forum,
+          attributes: ['id','name']
         }
       ]
     })
@@ -106,14 +115,14 @@ router.get('/b/:name', withAuth, async (req, res) => {
           include: [
             {
               model: User,
-              attributes: ['id', 'username']
+              attributes: ['id', 'username', 'avatar'],
             },
             {
               model: Forum,
               attributes: ['id', 'name']
             }
           ],
-        }
+        },
       ] 
     });
 
@@ -124,13 +133,19 @@ router.get('/b/:name', withAuth, async (req, res) => {
     }
 
     const userData = await User.findOne({
-      where: {id: req.session.user_id}
-    })
+      where: {
+        id: req.session.user_id
+      },
+      include: [
+        {
+          model: Forum,
+          attributes: ['id','name']
+        }
+      ]
+    });
     
     const user = userData.toJSON();
     const forum = namedForum.toJSON();
-
-    console.log(forum)
 
     res.render('forum', {
       forum,
@@ -148,20 +163,49 @@ router.get('/b/:name', withAuth, async (req, res) => {
   }
 });
 
-router.get('/b/:name/:post', async (req, res) => {
-  const params = {
-    name: req.params.name,
-    id: req.params.post
-  }
+router.get('/b/:name/:id', withAuth, async (req, res) => {
 
   try {
-    const activePost = await Post.findOne({
-      where: {
-        id: params.id
-      }
+    // Active user. Used for logic in posting and follow mechanic
+    const userData = await User.findOne({
+      where: {id: req.session.user_id},
+      include: Forum
     })
+
+    const user = userData.toJSON()
+
+    const postData = await Post.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [
+        {model: Forum},
+        {model: User, attributes: ['id', 'username', 'avatar']}
+      ]
+    })
+
+    const post = postData.toJSON()
+    console.log(post)
+
+    const commentData = await Comment.findAll({
+      where: {
+        post_id: req.params.id
+      },
+      include: [
+        {model: User, attributes: ['id', 'username', 'avatar']}
+      ]
+    })
+    
+    const comments = commentData.map((comment) => comment.toJSON())
+    // res.status(200).json(comments)
   
-    res.status(200).json(activePost)
+    res.render('post', {
+      user,
+      post,
+      comments,
+      logged_in: req.session.logged_in
+    })
+
   } catch (err) {
     res.status(500).json({
       message: "Whoops! Something went wrong..."
