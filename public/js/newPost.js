@@ -24,13 +24,37 @@ const newPost = async (event) => {
             headers: { 'Content-Type': 'application/json' },
         });
     
-        if (response.ok) {
-            location.reload()
-        } else {
-            alert(response.statusText)
-        }
+    if (response.ok) {
+        document.location.replace(`/b/deepthoughts`)
+    } else {
+        alert(response.statusText)
+    }
     } else {
         // Warns user of missing 
         document.querySelector('.post-err').textContent = "Your post must have a title and post content!"
     }
-}  
+}
+
+const newComment = async (event) => {
+
+    event.preventDefault();
+
+    const comment = document.querySelector('[data-comment]').value.trim();
+    const post_id = document.querySelector('[data-postid]').getAttribute('data-postid');
+
+    if (comment && post_id) {
+        const response = await fetch('/api/comment/', {
+            method: 'POST',
+            body: JSON.stringify({comment, post_id}),
+            headers: { 'Content-Type': 'application/json' },
+        })
+
+        if (response.ok) {
+            document.location.reload()
+        } else {
+            alert(response.statusText)
+        }
+    } else {
+        alert("You must have add a comment first!")
+    }
+}

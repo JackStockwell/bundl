@@ -1,3 +1,4 @@
+// Handles logout, with a post request to the DB.
 const handleLogout = async () => {
     // Make a POST request to destroy the session on the back end
     const response = await fetch('/api/users/logout', {
@@ -13,7 +14,7 @@ const handleLogout = async () => {
     }
 };
 
-
+// Allows the user to follow.
 const followForum = async (event) => {
     event.preventDefault();
 
@@ -23,13 +24,13 @@ const followForum = async (event) => {
         method: 'POST',
         body: JSON.stringify({forum_id}),
         headers: { 'Content-Type': 'application/json' },
-      });
-    
-      if (response.ok) {
+        });
 
-      } else {
-        alert(response.statusText);
-      }
+    if (response.ok) {
+    
+    } else {
+    alert(response.statusText);
+    }
 }
 
 const newForum = async (event) => {

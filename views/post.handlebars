@@ -30,10 +30,10 @@
                 </div>
             </section>
             {{!-- COMMENTS --}}
-            <section class="comment-box">
+            <section class="comment-div">
                 <h3>Comment</h3>
-                <input data-comment type="text" name="comment" class="comment-box" placeholder="Comment..">
-                <input type="button" class="btn-dark" onchange="newComment(event)" value="Comment">
+                <textarea rows="6" data-comment type="text" name="comment" class="" placeholder="Comment.."></textarea>
+                <input type="button" class="btn-dark" onclick="newComment(event)" value="Comment">
             </section>
 
             <section class="post-container">
@@ -48,10 +48,11 @@
                 <button data-open-post class="btn">New Post</button>
                 <dialog data-modal-post class="modal">
                     <form onsubmit="newPost(event)">
+                        <h2>New post</h2>
                         <p class="post-err"></p>
                         <div class="modal-input">
                             <input type="text" name="title" id="postTitle" placeholder="Title">
-                            <input type="text" name="content" id="postContent" placeholder="Your new post!">    
+                            <textarea type="text" name="content" id="postContent" placeholder="Your new post!"></textarea>    
                         </div>
 
                         <div class="modal-confirm">
@@ -67,13 +68,18 @@
                     <p id="username-handle">{{forum.name}}</p>
                     <button class="btn" onclick="followForum(event)" id="follow-user">Follow</button>
                 {{/isFollow}}
-            <section class="bundl-list">
-                <h2>My bundls</h2>
+            <section class="bundl-list-div">
                 <hr>
-                {{#each user.forums as |forum|}}
-                {{> forum-list}}
-                {{/each}}
+                <h2>my bundls</h2>
+                <hr>
+                <div>
+                    {{#each user.forums as |forum|}}
+                    {{> forum-list}}
+                    {{/each}}
+                </div>
             </section>
         </aside>
     </section>
+    <script src="/js/newPost.js"></script>
+</main>
 

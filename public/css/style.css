@@ -13,7 +13,7 @@
 }
 
 body {
-  display: block;
+  display: flex;
   flex-direction: column;
   min-height: 100vh;
   align-items: center;
@@ -53,6 +53,16 @@ body {
   display: flex;
   gap: 1ch;
 }
+
+.profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.profile-btn img {
+  border: 2px solid var(--light-text);
+}
+
 
 /* LINKS */
 
@@ -194,7 +204,11 @@ h1, h2, h3, h4, h5 ,h6 {
   justify-content: space-between;
 }
 
-
+textarea {
+  resize: none;
+  padding: 0;
+  margin: 0;
+}
 
 
 
@@ -228,6 +242,7 @@ hr {
   border-radius: 50%;
   width: 150px;
   height: 150px;
+  object-fit: cover;
 }
 
 /* STANDARD WRAPPER */
@@ -268,23 +283,28 @@ aside {
 aside h2, h3 {
   font-family: var(--text);
   font-weight: 400;
+  margin: 10px 0;
 }
 
 aside .btn {
   width: 100%;
 }
 
+.bundl-list-div,
 .bundl-list {
   display: grid;
   grid-template-columns: 1fr;
-  margin: var(--padding) 0;
-  gap: var(--padding);
+}
+
+.bundl-list-div h2 {
+  text-align: center;
 }
 
 .bundl-list a {
   text-align: left;
   padding: 1ch 0;
   font-family: var(--text);
+  width: 100%;
 }
 
 
@@ -297,7 +317,7 @@ aside .btn {
 .btn-light,
 .btn-dark {
   cursor: pointer;
-  padding: 1ch 3ch;
+  padding: 1ch 2ch;
   transition: box-shadow 300ms ease;
   color: var(--dark-text);
   background: transparent;
@@ -305,6 +325,8 @@ aside .btn {
   font-size: 1em;
   border: 0px;
   border-bottom: 2px solid var(--light-text);
+  font-family: var(--text);
+  text-transform: lowercase;
 }
 
 .btn,
@@ -319,7 +341,6 @@ aside .btn {
   color: var(--light-text);
   box-shadow: inset 0 0 0 0 var(--darkbg);
 }
-
 
 /* MODAL STYLING */
 
@@ -378,19 +399,16 @@ aside .btn {
   grid-template-columns: 1fr;
   background: var(--light-text);
   padding: 0.75rem;
-  border-radius: 1rem;
 }
 
 
 /* POST TITLE */
 .post-title-div,
-.post-info-div,
-.user-info a {
+.post-info-div {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 1rem;
-  padding: 0 var(--padding);
 }
 
 .post-title-div h3 {
@@ -415,23 +433,40 @@ aside .btn {
 
 /* USER INFO */
 
+.user-info {
+  display: flex;
+}
+
+.user-info a {
+  display: flex;
+  align-items: center;
+}
+
 .user-img {
+  width: 30px;
+  height: 30px;
   max-width: 30px;
   max-height: 30px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 /* COMMENT BOX */
 
-.comment-box {
+.comment-div {
+  display: grid;
   margin: 1rem 0;
+  grid-template-columns: 1fr;
+  gap: var(--padding)
 }
 
 [data-comment] {
   width: 100%;
-  margin: 0.5ch 0;
 }
 
+.comment-box .btn-dark {
+  float: right;
+}
 
 /* FOOTER */
 
@@ -439,12 +474,24 @@ footer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
-  bottom: 0;
-  height: 5rem;
+  margin-top: auto;
+  height: fit-content;
   background: var(--darkbg-2);
   width: 100%;
 }
 
+footer h3 {
+  text-align: center;
+}
+
+.gh-contact {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1ch;
+  list-style-type: none;
+  margin-inline: 0;
+  padding: 0;
+}
 
   
 /* MEDIA QUERIES */
@@ -486,7 +533,7 @@ footer {
   }
 
   .largebtn:hover {
-    box-shadow: inset 300px 0 0 0 var(--light-text);
+    box-shadow: inset 375px 0 0 0 var(--light-text);
     color: var(--dark-text);
   }
 

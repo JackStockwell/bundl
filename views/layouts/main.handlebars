@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bundl</title>
-  <link rel="stylesheet" type="text/css" href="/css/reset.css">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <script src="https://kit.fontawesome.com/d9306d9c98.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -15,16 +15,10 @@
     <a href="/"><h1>bundl</h1></a>
     <div>
     {{!-- Profile Link BTN     --}}
-        <a href="/p/{{user.username}}" class="btn">{{user.username}}</a>
-    {{!-- LOGOUT MODAL --}}
-        <button data-open-modal-logout class="btn">Logout</button>
-        <dialog data-modal-logout class="modal">
-            <h2>Logout?</h2>
-            <div class="modal-wrapper logout-modal"> 
-            <button class="btn" onclick="handleLogout(event)">Yes</button>
-            <button class="btn" data-close-modal-logout>No</button>
-            </div>
-        </dialog>
+        <a href="/p/{{user.username}}" class="btn profile-btn">
+            <img class="user-img" src="http://localhost:3001/assets/avatar-uploads/{{user.avatar}}" alt="">
+            {{user.username}}
+        </a>
     {{!-- NEW BUNDL MODAL --}}
         <button data-open-modal-forum class="btn">New bundl</button>
         <dialog data-modal-newforum data-modal="new" class="modal">
@@ -35,6 +29,15 @@
             <input type="text" name="description" data-bundl-desc placeholder="Brief description">
             <button class="btn" onclick="newForum(event)">Yes</button>
             <button class="btn" data-close-modal-forum>Cancel</button>
+            </div>
+        </dialog>
+            {{!-- LOGOUT MODAL --}}
+        <button data-open-modal-logout class="btn">Logout</button>
+        <dialog data-modal-logout class="modal">
+            <h2>Logout?</h2>
+            <div class="modal-wrapper logout-modal"> 
+            <button class="btn" onclick="handleLogout(event)">Yes</button>
+            <button class="btn" data-close-modal-logout>No</button>
             </div>
         </dialog>
     </div>
@@ -49,22 +52,29 @@
   {{{body}}}
 
   {{/if}}
-<footer>
-    <section class="foot-contacts">
-        <ul>
-            <li>Test</li>
-            <li>Test2</li>
-        </ul>
-    </section class="foot-bundls">
-
-    <section>
-
-    </section>
-
-</footer>
 </main>
   {{#if logged_in}}
     <script src="/js/script.js"></script>
   {{/if}}
+
+  <footer>
+    <section class="foot-contacts">
+        <h3>Creators</h3>
+        <ul class="gh-contact">
+            <li><i class="fa-brands fa-github"></i><a href="https://github.com/JackStockwell" target="_blank" rel="noopener noreferrer"> JackStockwell</a></li>
+            <li><i class="fa-brands fa-github"></i><a href="https://github.com/ahs456" target="_blank" rel="noopener noreferrer"> ahs456</a></li>
+            <li><i class="fa-brands fa-github"></i><a href="https://github.com/AJosueBN" target="_blank" rel="noopener noreferrer"> AJosueBN</a></li>
+            <li><i class="fa-brands fa-github"></i><a href="https://github.com/ThinkPad2023" target="_blank" rel="noopener noreferrer"> ThinkPad2023</a></li>
+        </ul>
+    </section class="foot-bundls">
+    <section>
+        <h3>About us</h3>
+        <p>Coming soon..</p>
+    </section>
+</footer>
+  {{#if logged_in}}
+    <script src="/js/script.js"></script>
+  {{/if}}
 </body>
+
 </html>

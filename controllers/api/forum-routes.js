@@ -1,23 +1,19 @@
 const router = require('express').Router();
 const { User, Post, Forum, UserForum } = require('../../models');
 
+// Gets all forums on the database. All of their posts and users.
 router.get('/', async (req, res) => {
     try {
       const forumData = await Forum.findAll({
         include: [
             {model: Post},
-            {
-              model: User,
-              where: {
-                
-              }
-            }
+            {model: User}
         ],
       });
   
       if (!forumData) {
         return res.status(404).json({
-          message: "Post not found",
+          message: "No forums on the database!",
         })
       }
       
@@ -28,28 +24,23 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Makes a new Forum, with the parsed infomation.
 router.post('/new', async (req, res) => {
   
   try {
-    console.log(req.body)
-
     const forumData = await Forum.create({
       name: req.body.name,
       description: req.body.description
     });
-
-    if (!forumData) {
-
-    }
 
     res.status(200).json(forumData)
 
   } catch (err) {
     res.status(500).json({err})
   }
-
 })
 
+// Follow request, creates a new link between the user and forum.
 router.post('/follow', async (req, res) => {
 
   if (!req.body.forum_id || !req.session.user_id) {
@@ -65,11 +56,7 @@ router.post('/follow', async (req, res) => {
       forum_id: req.body.forum_id,
     }
 
-    console.log(newFollow)
-
     const updateForum = await UserForum.create(newFollow)
-    
-    console.log(updateForum)
     
     res.status(200).json(updateForum)
 
