@@ -172,6 +172,7 @@ h1, h2, h3, h4, h5 ,h6 {
 .profile-login,
 .profile-signup h2 {
   text-align: center;
+  color: var(--light-text);
 }
 
 .profile-login form,
@@ -229,6 +230,7 @@ hr {
   justify-items: center;
   justify-content: center;
   background: var(--light-blue-bg);
+  color: var(--light-text);
   padding: var(--padding);
 }
 

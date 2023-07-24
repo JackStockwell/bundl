@@ -76,9 +76,7 @@ router.get('/p/:name', withAuth, async (req, res) => {
     })
 
     if (!userData) {
-      return res.status(404).json({
-        message: "",
-      })
+      return res.render('404')
     }
 
     const user = userData.toJSON()
@@ -172,6 +170,10 @@ router.get('/b/:name/:id', withAuth, async (req, res) => {
         {model: Forum}
       ]
     })
+
+    if (!userData) {
+      return res.render('404')
+    }
 
     const user = userData.toJSON();
 
