@@ -1,0 +1,56 @@
+<style>
+* {
+    transition: all 0.6s;
+}
+
+html {
+    height: 100%;
+}
+
+body{
+    font-family: 'Lato', sans-serif;
+    color: #888;
+    margin: 0;
+}
+
+#main{
+    display: table;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+}
+
+.fof{
+	  display: grid;
+      grid-template-columns: 1fr;
+}
+
+.fof h1{
+	  font-size: 50px;
+	  display: inline-block;
+	  padding-right: 12px;
+}
+
+.error404 {
+    color: black;
+}
+
+</style>
+
+
+<div id="main">
+    	<div class="fof">
+        		<h1 class="error404">Error 404</h1>
+                <button onclick="returnPage(event)" class="btn" style="color: black;">Take me back</button>
+    	</div>
+</div>
+
+
+<script>
+
+function returnPage(event) {
+    event.preventDefault(event);
+    document.location.replace(document.back())
+}
+
+</script>
