@@ -125,9 +125,7 @@ router.get('/b/:name', withAuth, async (req, res) => {
     });
 
     if (!namedForum) {
-      return res.status(404).json({
-        message: "Error 404"
-      })
+      return res.render('404')
     }
 
     // Usesd to generate the 'my bundles' aside.
