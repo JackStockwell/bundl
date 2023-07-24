@@ -18,7 +18,7 @@
         </section>
         <aside>
             <section>
-                <button data-open-post class="btn">New Post</button>
+                <button data-open-post class="btn" onclick="newPostModal(event)">New Post</button>
                 <dialog data-modal-post class="modal">
                     <form onsubmit="newPost(event)">
                         <p class="post-err"></p>
@@ -28,7 +28,7 @@
                         
                             <div class="modal-confirm">
                                 <input onclick="newPost(event)" type="submit" class="btn" value="Post">
-                                <button class="btn" data-close-post>Cancel</button>    
+                                <button class="btn" data-close-post onclick="closePostModal(event)">Cancel</button>    
                             </div>
                         </div>
                     </form>
@@ -52,6 +52,4 @@
             </section>
         </aside>
     </section>
-    
-<script src="../js/newPost.js"></script>
 </main>

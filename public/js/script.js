@@ -1,5 +1,5 @@
 // Handles logout, with a post request to the DB.
-const handleLogout = async () => {
+const handleLogoutEvent = async () => {
     // Make a POST request to destroy the session on the back end
     const response = await fetch('/api/users/logout', {
       method: 'POST',
@@ -27,7 +27,7 @@ const followForum = async (event) => {
         });
 
     if (response.ok) {
-    
+        document.location.reload();
     } else {
     alert(response.statusText);
     }
@@ -59,6 +59,56 @@ const newForum = async (event) => {
     }
 
 }
+
+const newPost = async (event) => {
+    event.preventDefault();
+
+    const title = document.querySelector('#postTitle').value.trim();
+    const content = document.querySelector('#postContent').value.trim();
+    const forum_id = document.querySelector('[data-forum_id]').getAttribute('data-forum_id');
+    
+    if (title && content) {
+        const response = await fetch('/api/post/', {
+            method: 'POST',
+            body: JSON.stringify({title, content, forum_id}),
+            headers: { 'Content-Type': 'application/json' },
+        });
+    
+    if (response.ok) {
+        document.location.reload();
+    } else {
+        alert(response.statusText)
+    }
+    } else {
+        // Warns user of missing 
+        document.querySelector('.post-err').textContent = "Your post must have a title and post content!"
+    }
+}
+
+const newComment = async (event) => {
+
+    event.preventDefault();
+
+    const comment = document.querySelector('[data-comment]').value.trim();
+    const post_id = document.querySelector('[data-postid]').getAttribute('data-postid');
+
+    if (comment && post_id) {
+        const response = await fetch('/api/comment/', {
+            method: 'POST',
+            body: JSON.stringify({comment, post_id}),
+            headers: { 'Content-Type': 'application/json' },
+        })
+
+        if (response.ok) {
+            document.location.reload()
+        } else {
+            alert(response.statusText)
+        }
+    } else {
+        alert("You must have add a comment first!")
+    }
+}
+
 
 
 
@@ -94,3 +144,15 @@ openForumModal.addEventListener('click', () => {
 closeForumModal.addEventListener('click', () => {
     forumModal.close()
 })
+
+const newPostModal = async (event) => {
+    event.preventDefault();
+    const newPostModal = document.querySelector('[data-modal-post]')
+    newPostModal.showModal()
+}
+
+const closePostModal = async (event) => {
+    event.preventDefault();
+    const newPostModal = document.querySelector('[data-modal-post]')
+    newPostModal.close()
+}

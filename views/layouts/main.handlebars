@@ -37,7 +37,7 @@
         <dialog data-modal-logout class="modal">
             <h2>Logout?</h2>
             <div class="modal-wrapper logout-modal"> 
-            <button class="btn" onclick="handleLogout(event)">Yes</button>
+            <button class="btn" onclick="handleLogoutEvent(event)">Yes</button>
             <button class="btn" data-close-modal-logout>No</button>
             </div>
         </dialog>
@@ -54,10 +54,6 @@
 
   {{/if}}
 </main>
-  {{#if logged_in}}
-    <script src="/js/script.js"></script>
-  {{/if}}
-
   <footer>
     <section class="foot-contacts">
         <h3>Creators</h3>
