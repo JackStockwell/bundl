@@ -203,7 +203,6 @@ router.get('/b/:name/:id', withAuth, async (req, res) => {
     // If there is comment data, it is render
     if (commentData) {
       const comments = commentData.map((comment) => comment.toJSON())
-      console.log(comments)
       res.render('post', {
         user,
         post,
