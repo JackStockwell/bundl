@@ -29,7 +29,15 @@ const handleSignup = async (event) => {
   const email = document.querySelector('#email-signup').value.trim();
   const password = document.querySelector('#password-signup').value.trim();
   const passwordConfirm = document.querySelector('#confirm-signup').value.trim();
-  const PWerror= document.getElementById("error-span")
+  const PWerror= document.getElementById("error-span=pw")
+
+  if (!email || !username) {
+    document.getElementById("error-span-email").innerText='Must have an Email and Username!'
+  }
+  
+  if (password !== passwordConfirm) {
+    document.getElementById("error-span-pw").innerText = "Passwords must match!"
+  }
 
   // Ensures all fields are inserted and password confirmation matches.
   if (username && email && password === passwordConfirm) {
@@ -45,13 +53,6 @@ const handleSignup = async (event) => {
     } else {
         PWerror.innerHTML='Password CANNOT be less than 8 or bigger than 32!'
     }
-  } else if (password !== passwordConfirm) {
-        PWerror.innerHTML='Passwords must match!'
-  } else if (!username) {
-    PWerror.innerHTML='Must have a username'
-  } else {
-    PWerror.innerHTML='Must have an email!'
   }
-
 }
 
